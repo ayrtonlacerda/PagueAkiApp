@@ -3,7 +3,7 @@ import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fff;
+  background: #f9f9f9;
   justify-content: center;
   align-items: center;
   padding: 15px;
@@ -12,7 +12,6 @@ export const Container = styled.View`
 export const Logo = styled.Image`
   width: 63%;
   height: 13%;
-  background: #fff;
   align-self: center;
   margin-bottom: 30px;
 `;
@@ -21,7 +20,7 @@ export const Form = styled.View``;
 
 export const Input = styled.TextInput`
   height: 48px;
-  background: #eee;
+  background: #e9e9e9;
   border-radius: 9px;
   padding: 0 20px;
   margin: 10px 0;
@@ -38,7 +37,7 @@ export const ButtonsView = styled.View`
 export const ButtonSignup = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: #f7f7f7;
   border-radius: 10px;
   border-width: 1.5px;
   border-color: #77a93a;

@@ -12,7 +12,7 @@ import Perfil from './pages/Perfil';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Routes() {
+export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
@@ -23,4 +23,13 @@ function Routes() {
   );
 }
 
-export default Routes;
+export function Pages() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Perfil" component={Perfil} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}

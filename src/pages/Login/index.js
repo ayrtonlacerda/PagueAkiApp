@@ -1,8 +1,6 @@
-import * as yup from 'yup';
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
 import {
   Container,
   Input,
@@ -23,7 +21,7 @@ function Login({ navigation }) {
   const [userPass, setPass] = useState('');
 
   function handleLogin() {
-    navigation.navigate('Signup');
+    navigation.navigate({ screen: 'Home' });
   }
 
   return (
