@@ -21,7 +21,7 @@ function Login({ navigation }) {
   const [userPass, setPass] = useState('');
 
   function handleLogin() {
-    navigation.navigate({ screen: 'Home' });
+    navigation.navigate('Home');
   }
 
   return (

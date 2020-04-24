@@ -61,6 +61,7 @@ export const FormInput = styled.View``;
 export const TextInstruction = styled.Text`
   color: rgba(0, 0, 0, 0.55);
   margin-top: 5px;
+  padding-left: 5px;
 `;
 
 export const Input = styled.TextInput.attrs({
@@ -72,7 +73,7 @@ export const Input = styled.TextInput.attrs({
   border-width: 1px;
   border-color: #CDCDCD;
   padding: 0 18px;
-  margin: 5px 0;
+  margin: 4px 0;
   margin-bottom: 12px;
 `;
 
