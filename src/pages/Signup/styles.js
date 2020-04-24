@@ -51,6 +51,7 @@ export const Avatar = styled.Image`
   height: 100%;
   border-radius: 200px;
 `;
+
 export const AvatarText = styled.Text`
   font-weight: bold;
   font-size: 13.5px;

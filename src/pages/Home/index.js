@@ -20,12 +20,16 @@ export default function Home() {
   const TextDescription =
     'There are many variations of passages of Lorem Ipsum available, but the majority believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidde';
 
+  const green = '77A93A';
+  const grey = 'CDCDCD';
+  const darkGrey = '5B5B5B';
+
   return (
     <Container>
       <PageView>
         <Logo source={require('../../assets/images/LogoBranca.png')} />
         <TouchableWithoutFeedback onPress={() => { }}>
-          <Card>
+          <Card cardColor={green}>
             <CardTopView>
               <CardTitleText>{Text1}</CardTitleText>
               <CardImage
@@ -38,7 +42,7 @@ export default function Home() {
           </Card>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { }}>
-          <Card>
+          <Card cardColor={grey}>
             <CardTopView>
               <CardTitleText>{Text2}</CardTitleText>
               <CardImage
@@ -51,7 +55,7 @@ export default function Home() {
           </Card>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { }}>
-          <Card>
+          <Card cardColor={darkGrey}>
             <CardTopView>
               <CardTitleText>{Text3}</CardTitleText>
               <CardImage

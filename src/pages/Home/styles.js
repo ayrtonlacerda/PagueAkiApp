@@ -22,7 +22,8 @@ export const Logo = styled.Image`
 
 export const Card = styled.View`
   height: 27%;
-  background: #77a93a;
+  background: ${(props) =>
+    props.cardColor ? `#${props.cardColor}` : '#77a93a'};
   margin-right: 5%;
   margin-left: 5%;
   margin-bottom: 6%;
