@@ -27,6 +27,28 @@ export const Input = styled.TextInput`
   margin-bottom: 10px;
 `;
 
+export const InputPass = styled.TextInput.attrs({
+  placeholderTextColor: '#000',
+})`
+  height: 45px;
+  background: #fff;
+  border-radius: 11px;
+  padding: 0 15px;
+  border: ${(props) =>
+    props.passCheck ? '2px solid #000' : '2px solid #ff0000'};
+  margin-top: 8px;
+  margin-bottom: ${(props) => (props.passLengthCheck ? '15px' : '5px')};
+  elevation: 6;
+`;
+
+export const ErrorText = styled.Text`
+  font-size: 10px;
+  padding-bottom: 8px;
+  padding-left: 15px;
+  font-weight: bold;
+  color: #ff0000;
+`;
+
 export const ButtonsView = styled.View`
   flex-direction: row;
   width: 80%;

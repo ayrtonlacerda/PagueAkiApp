@@ -67,28 +67,92 @@ function Signup({ navigation }) {
 
   return (
     <Container>
-      <Form>
-        <Logo source={require('../../assets/images/LogoBranca.png')} />
-        <AvatarView>
-          <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
-            {fileUri ? (
-              <Avatar
-                source={{ uri: fileUri }}
-                style={{ resizeMode: 'cover' }}
-              />
-            ) : (
-                <>
-                  <Icon name="photo-camera" size={25} />
-                  <AvatarText>Escolher foto</AvatarText>
-                </>
-              )}
-          </ButtonChangeAvatar>
-        </AvatarView>
-        <FormInput>
+      <Logo source={require('../../assets/images/LogoBranca.png')} />
+      <AvatarView>
+        <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
+          {fileUri ? (
+            <Avatar source={{ uri: fileUri }} style={{ resizeMode: 'cover' }} />
+          ) : (
+              <>
+                <Icon name="photo-camera" size={25} />
+                <AvatarText>Escolher foto</AvatarText>
+              </>
+            )}
+        </ButtonChangeAvatar>
+      </AvatarView>
+      <FormInput>
+        <TextInstruction>Nome</TextInstruction>
+        <Input
+          value={user.name}
+          onChangeText={(text) => setUser(text)}
+          placeholder="Usuário Exemplo"
+        />
+      </FormInput>
+      <FormInput>
+        <TextInstruction>E-mail</TextInstruction>
+        <Input
+          value={user.email}
+          onChangeText={(text) => setUser(text)}
+          placeholder="exemplo@exemplo.com"
+        />
+      </FormInput>
+      <FormInput>
+        <TextInstruction>Celular</TextInstruction>
+        <Input
+          value={user.tel}
+          onChangeText={(text) => setUser(text)}
+          placeholder="(61) 99999-8888"
+        />
+      </FormInput>
+      <FormInput>
+        <TextInstruction>Senha</TextInstruction>
+        <Input
+          value={user.pass}
+          onChangeText={(text) => setUser(text)}
+          placeholder="Mínimo de 6 dígitos"
+        />
+      </FormInput>
+      <FormInput>
+        <TextInstruction>Repetir Senha</TextInstruction>
+        <Input
+          value={user.pass}
+          onChangeText={(text) => setUser(text)}
+          placeholder="******"
+        />
+      </FormInput>
+      <FormInput>
+        <TextInstruction>E-mail</TextInstruction>
+        <Input
+          value={user.pass}
+          onChangeText={(text) => setUser(text)}
+          placeholder="exemplo@exemplo.com"
+        />
+      </FormInput>
+      <ButtonsView>
+        <ButtonSignup onPress={handleSignUp}>
+          <SignupButtonText>REGISTRAR</SignupButtonText>
+        </ButtonSignup>
+        <ButtonCancel onPress={handleSignUp}>
+          <CancelText>Cancelar</CancelText>
+        </ButtonCancel>
+      </ButtonsView>
+    </Container>
+  );
+}
+
+export default Signup;
+
+/*
+<FormInput>
           <TextInstruction>Nome</TextInstruction>
           <Input
-            value={user.pass}
-            onChangeText={(text) => setUser(text)}
+            value={user.name}
+            onChangeText={(text) =>
+              setUser((prevState) => ({
+                ...prevState,
+                name: text,
+              }))
+            }
             placeholder="Usuário Exemplo"
           />
         </FormInput>
@@ -125,18 +189,4 @@ function Signup({ navigation }) {
             placeholder="Senha"
             secureTextEntry
           />
-        </FormInput>
-      </Form>
-      <ButtonsView>
-        <ButtonSignup onPress={handleSignUp}>
-          <SignupButtonText>REGISTRAR</SignupButtonText>
-        </ButtonSignup>
-        <ButtonCancel onPress={handleSignUp}>
-          <CancelText>Cancelar</CancelText>
-        </ButtonCancel>
-      </ButtonsView>
-    </Container>
-  );
-}
-
-export default Signup;
+        </FormInput> */

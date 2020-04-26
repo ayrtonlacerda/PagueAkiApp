@@ -1,41 +1,44 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    alignItems: 'center',
+    width: '100%',
+  },
 })`
   flex: 1;
-  padding: 10px;
   background: #f9f9f9;
 `;
 
 export const Form = styled.View`
   flex: 1;
   flex-direction: column;
-  border-bottom-width: 1px;
-  border-color: #fff;
   padding: 5px;
-  margin-bottom: 50%;
+  background: #000;
+  align-items: center;
 `;
 
 export const Logo = styled.Image`
-  width: 73%;
-  height: 13%;
+  width: 200px;
+  height: 75px;
   background: #fff;
   align-self: center;
   margin-bottom: 8px;
 `;
 
 export const AvatarView = styled.View`
-  width: 100%;
-  height: 25%;
+  width: 100px;
+  height: 100px;
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
 `;
+
 export const ButtonChangeAvatar = styled.TouchableOpacity`
-  width: 35%;
-  height: ${(props) => (props.photoIsSet ? '105%' : '95%')};
+  width: 100px;
+  height: ${(props) => (props.photoIsSet ? '100px' : '100px')};
   margin-top: ${(props) => (props.photoIsSet ? '5px' : 0)};
   border-radius: 200px;
   border-width: 3px;
@@ -57,7 +60,9 @@ export const AvatarText = styled.Text`
   font-size: 13.5px;
 `;
 
-export const FormInput = styled.View``;
+export const FormInput = styled.View`
+  width: 90%;
+`;
 
 export const TextInstruction = styled.Text`
   color: rgba(0, 0, 0, 0.55);
@@ -79,7 +84,7 @@ export const Input = styled.TextInput.attrs({
 `;
 
 export const ButtonsView = styled.View`
-  margin-bottom: 10%;
+  padding-bottom: 30px;
 `;
 
 export const ButtonSignup = styled(RectButton)`
@@ -89,6 +94,7 @@ export const ButtonSignup = styled(RectButton)`
   border-radius: 10px;
   opacity: ${(props) => (props.loading ? 0.7 : 1)};
   height: 40px;
+  width: 90%;
   margin-bottom: 5%;
 `;
 

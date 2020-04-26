@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
+import InputText from '../../components/input';
+
 import {
   Container,
   Input,
+  InputPass,
+  ErrorText,
   Logo,
   Form,
   ButtonsView,
@@ -17,11 +21,26 @@ import {
 
 function Login({ navigation }) {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState('');
-  const [userPass, setPass] = useState('');
+  const [forms, setForms] = useState({
+    user: '',
+    userPass: '',
+  });
+  const [passCheck, setPassCheck] = useState(true);
 
-  function handleLogin() {
+  const handleLogin = () => {
+    console.tron.log(forms);
+
     navigation.navigate('Home');
+  };
+
+  function checkPassLength(text) {
+    const checkUserPassLength = text.length;
+
+    if (checkUserPassLength <= 5) {
+      setPassCheck({ passCheck: false });
+    } else {
+      setPassCheck({ passCheck: true });
+    }
   }
 
   return (
@@ -29,18 +48,28 @@ function Login({ navigation }) {
       <Logo source={require('../../assets/images/LogoBranca.png')} />
       <Form>
         <Input
-          value={user}
-          onChangeText={(text) => setUser(text)}
+          value={forms.user}
+          onChangeText={(text) =>
+            setForms((prevState) => ({
+              ...prevState,
+              user: text,
+            }))
+          }
           placeholder="E-mail ou telefone"
           autoCorrect={false}
           autoCapitalize="none"
         />
-        <Input
-          value={userPass}
-          onChangeText={(text) => setPass(text)}
-          placeholder="Senha"
-          onSubmitEditing={handleLogin}
-          secureTextEntry
+        <InputText
+          placeholder="Asdewq"
+          secured
+          value={forms.userPass}
+          onChangeText={(text) =>
+            setForms((prevState) => ({
+              ...prevState,
+              userPass: text,
+            }))
+          }
+          error
         />
         <ButtonsView>
           <ButtonSignup onPress={() => navigation.navigate('Signup')}>
