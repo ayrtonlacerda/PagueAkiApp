@@ -1,29 +1,27 @@
 import React from 'react';
 
-import { Input, ErrorText } from './styles';
+import { TextInput, ErrorText, Title } from './styles';
 
-const TextInput = ({
-  onChangeText,
+export const Input = ({
+  title,
+  error,
   value,
-  secured = false,
+  outline,
+  secured,
   placeholder = '',
-  background = '',
   paddingLeft = '',
-  error = false,
+  onChangeText,
 }) => (
-    <>
-      <Input
-        value={value}
-        onChangeText={onChangeText}
-        secureTextEntry={secured}
-        placeholder={placeholder}
-        background={background}
-        paddingLeft={paddingLeft}
-      />
-      {error ? (
-        <ErrorText>A senha deve possuir no mínimo 6 caracteres</ErrorText>
-      ) : null}
-    </>
-  );
-
-export default TextInput;
+  <>
+    {title && <Title>{title}</Title>}
+    {error && <ErrorText>{error}</ErrorText>}
+    <TextInput
+      value={value}
+      onChangeText={onChangeText}
+      secureTextEntry={secured}
+      placeholder={placeholder}
+      outline={outline}
+      paddingLeft={paddingLeft}
+    />
+  </>
+);

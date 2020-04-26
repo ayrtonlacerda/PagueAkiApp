@@ -1,20 +1,29 @@
 import styled from 'styled-components';
+import { colors, metrics } from '../../styles';
 
-export const Input = styled.TextInput`
-  height: 48px;
-  background: ${(props) =>
-    props.background ? `#${props.background}` : '#e9e9e9'};
-  border-radius: 9px;
-  padding-left: ${(props) =>
-    props.paddingLeft ? `${props.paddingLeft}px` : '20px'};
-  margin: 10px 0;
-  margin-bottom: ${(props) => (props.error ? '3px' : '10px')};
+export const TextInput = styled.TextInput`
+  height: 50px;
+  background: ${({ outline }) =>
+    outline ? colors.BACKGROUND : colors.GREY_LIGHT};
+  border-radius: ${metrics.RADIUS}px;
+  color: ${colors.DARK_STRONG};
+  padding-left: ${({ paddingLeft }) =>
+    paddingLeft ? `${paddingLeft}` : metrics.MEDIUM}px;
+  margin-bottom: ${metrics.BIG}px;
+  border-width: ${({ outline }) => (outline ? 1 : 0)}px;
+  border-color: ${colors.GREY};
+  width: 100%;
+`;
+
+export const Title = styled.Text`
+  color: ${colors.DARK};
+  margin-bottom: ${metrics.XSMALL}px;
+  font-size: 14px;
 `;
 
 export const ErrorText = styled.Text`
-  font-size: 10px;
-  padding-bottom: 8px;
-  padding-left: 15px;
-  font-weight: bold;
-  color: #ff0000;
+  font-size: 12px;
+  padding-left: ${metrics.XSMALL};
+  color: ${colors.RED};
+  margin-bottom: ${metrics.XXSMALL}px;
 `;

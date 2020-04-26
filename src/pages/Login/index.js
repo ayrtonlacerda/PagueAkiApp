@@ -1,23 +1,7 @@
 import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { Input, Button } from '../../components';
 
-import InputText from '../../components/input';
-
-import {
-  Container,
-  Input,
-  InputPass,
-  ErrorText,
-  Logo,
-  Form,
-  ButtonsView,
-  ButtonSignup,
-  SignupButtonText,
-  ButtonLogin,
-  LoginButtonText,
-  ForgotPassword,
-  PasswordText,
-} from './styles';
+import { Container, Logo, ButtonsView } from './styles';
 
 function Login({ navigation }) {
   const [loading, setLoading] = useState(false);
@@ -28,8 +12,6 @@ function Login({ navigation }) {
   const [passCheck, setPassCheck] = useState(true);
 
   const handleLogin = () => {
-    console.tron.log(forms);
-
     navigation.navigate('Home');
   };
 
@@ -46,47 +28,28 @@ function Login({ navigation }) {
   return (
     <Container>
       <Logo source={require('../../assets/images/LogoBranca.png')} />
-      <Form>
-        <Input
-          value={forms.user}
-          onChangeText={(text) =>
-            setForms((prevState) => ({
-              ...prevState,
-              user: text,
-            }))
-          }
-          placeholder="E-mail ou telefone"
-          autoCorrect={false}
-          autoCapitalize="none"
+      <Input
+        placeholder="Email ou senha"
+        value={forms.user}
+        onChangeText={(text) => setForms({ ...forms, user: text })}
+      />
+      <Input
+        placeholder="Asdewq"
+        secured
+        value={forms.userPass}
+        onChangeText={(text) => setForms({ ...forms, userPass: text })}
+      />
+      <ButtonsView>
+        <Button
+          half
+          text="CADASTRAR"
+          handleOnPress={() => {}}
+          outline
+          loading={loading}
         />
-        <InputText
-          placeholder="Asdewq"
-          secured
-          value={forms.userPass}
-          onChangeText={(text) =>
-            setForms((prevState) => ({
-              ...prevState,
-              userPass: text,
-            }))
-          }
-          error
-        />
-        <ButtonsView>
-          <ButtonSignup onPress={() => navigation.navigate('Signup')}>
-            <SignupButtonText>CADASTRAR</SignupButtonText>
-          </ButtonSignup>
-          <ButtonLogin loading={loading} onPress={handleLogin}>
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-                <LoginButtonText>ENTRAR</LoginButtonText>
-              )}
-          </ButtonLogin>
-        </ButtonsView>
-      </Form>
-      <ForgotPassword>
-        <PasswordText>Esqueceu sua senha?</PasswordText>
-      </ForgotPassword>
+        <Button half text="ENTRAR" handleOnPress={() => {}} loading={loading} />
+      </ButtonsView>
+      <Button text="Esqueceu sua senha?" tbutton />
     </Container>
   );
 }

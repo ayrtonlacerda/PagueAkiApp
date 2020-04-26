@@ -1,103 +1,25 @@
 import styled from 'styled-components';
-import { RectButton } from 'react-native-gesture-handler';
+import { colors, metrics } from '../../styles';
 
 export const Container = styled.View`
+  display: flex;
   flex: 1;
-  background: #f9f9f9;
+  background: ${colors.BACKGROUND};
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: ${metrics.BIG}px;
 `;
 
-export const Logo = styled.Image`
-  width: 63%;
-  height: 13%;
-  align-self: center;
-  margin-bottom: 30px;
-`;
-
-export const Form = styled.View``;
-
-export const Input = styled.TextInput`
-  height: 48px;
-  background: #e9e9e9;
-  border-radius: 9px;
-  padding: 0 20px;
-  margin: 10px 0;
-  margin-bottom: 10px;
-`;
-
-export const InputPass = styled.TextInput.attrs({
-  placeholderTextColor: '#000',
+export const Logo = styled.Image.attrs({
+  resizeMode: 'contain',
 })`
-  height: 45px;
-  background: #fff;
-  border-radius: 11px;
-  padding: 0 15px;
-  border: ${(props) =>
-    props.passCheck ? '2px solid #000' : '2px solid #ff0000'};
-  margin-top: 8px;
-  margin-bottom: ${(props) => (props.passLengthCheck ? '15px' : '5px')};
-  elevation: 6;
-`;
-
-export const ErrorText = styled.Text`
-  font-size: 10px;
-  padding-bottom: 8px;
-  padding-left: 15px;
-  font-weight: bold;
-  color: #ff0000;
+  width: 100%;
+  align-self: center;
 `;
 
 export const ButtonsView = styled.View`
+  width: 100%;
   flex-direction: row;
-  width: 80%;
   justify-content: space-between;
-  margin-top: 5%;
-`;
-
-export const ButtonSignup = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
-  background: #f7f7f7;
-  border-radius: 10px;
-  border-width: 1.5px;
-  border-color: #77a93a;
-  height: 40px;
-  width: 125px;
-`;
-
-export const SignupButtonText = styled.Text`
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #77a93a;
-  font-weight: bold;
-  text-align: center;
-`;
-
-export const ButtonLogin = styled(RectButton)`
-  justify-content: center;
-  align-items: center;
-  background: #77a93a;
-  border-radius: 10px;
-  opacity: ${(props) => (props.loading ? 0.7 : 1)};
-  height: 40px;
-  width: 125px;
-`;
-
-export const LoginButtonText = styled.Text`
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-`;
-
-export const ForgotPassword = styled.TouchableOpacity``;
-
-export const PasswordText = styled.Text`
-  font-style: italic;
-  font-weight: bold;
-  color: #77a93a;
-  margin-top: 35%;
+  margin-bottom: ${metrics.XXXBIG};
 `;
