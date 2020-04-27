@@ -1,33 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Input, Button } from '../../components';
-
+import { useCommons } from '../../hooks';
 import { Container, Logo, ButtonsView } from './styles';
+import { Imgs } from '../../assets';
 
-function Login({ navigation }) {
-  const [loading, setLoading] = useState(false);
+const Login = () => {
+  const { navigation } = useCommons();
   const [forms, setForms] = useState({
     user: '',
     userPass: '',
   });
-  const [passCheck, setPassCheck] = useState(true);
 
-  const handleLogin = () => {
-    navigation.navigate('Home');
-  };
+  const handleLogin = useCallback(() => {}, []);
 
-  function checkPassLength(text) {
-    const checkUserPassLength = text.length;
+  const handleSigup = useCallback(() => navigation.navigate('Signup'), [
+    navigation,
+  ]);
 
-    if (checkUserPassLength <= 5) {
-      setPassCheck({ passCheck: false });
-    } else {
-      setPassCheck({ passCheck: true });
-    }
-  }
+  const handleForgotPass = useCallback(() => {}, []);
 
   return (
     <Container>
-      <Logo source={require('../../assets/images/LogoBranca.png')} />
+      <Logo source={Imgs.LOGO_BRANCA} />
       <Input
         placeholder="Email ou senha"
         value={forms.user}
@@ -40,18 +34,16 @@ function Login({ navigation }) {
         onChangeText={(text) => setForms({ ...forms, userPass: text })}
       />
       <ButtonsView>
-        <Button
-          half
-          text="CADASTRAR"
-          handleOnPress={() => {}}
-          outline
-          loading={loading}
-        />
-        <Button half text="ENTRAR" handleOnPress={() => {}} loading={loading} />
+        <Button half text="CADASTRAR" handleOnPress={handleSigup} outline />
+        <Button half text="ENTRAR" handleOnPress={handleLogin} />
       </ButtonsView>
-      <Button text="Esqueceu sua senha?" tbutton />
+      <Button
+        text="Esqueceu sua senha?"
+        tbutton
+        handleOnPress={handleForgotPass}
+      />
     </Container>
   );
-}
+};
 
 export default Login;
