@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
+import { Container } from '../../components';
 
 import {
-  Container,
-  PageView,
+  Scroll,
   Logo,
   Card,
   CardTopView,
@@ -16,7 +16,7 @@ import {
 export default function Home() {
   const Text1 = 'What is Lorem Ipsum';
   const Text2 = 'Where can I get some';
-  const Text3 = 'Why do we use it quebra linha sa porra?';
+  const Text3 = 'Why do we use it';
   const TextDescription =
     'There are many variations of passages of Lorem Ipsum available, but the majority believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidde';
 
@@ -26,8 +26,8 @@ export default function Home() {
 
   return (
     <Container>
-      <PageView>
-        <Logo source={require('../../assets/images/LogoBranca.png')} />
+      <Logo source={require('../../assets/images/LogoBranca.png')} />
+      <Scroll>
         <TouchableWithoutFeedback onPress={() => { }}>
           <Card cardColor={green}>
             <CardTopView>
@@ -80,7 +80,7 @@ export default function Home() {
             </CardBottomView>
           </Card>
         </TouchableWithoutFeedback>
-      </PageView>
+      </Scroll>
     </Container>
   );
 }

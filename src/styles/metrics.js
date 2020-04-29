@@ -14,4 +14,5 @@ export const metrics = {
   XXBIG: 30,
   XXXBIG: 50,
   RADIUS: 10,
+  SAFEVIEW: 35,
 };

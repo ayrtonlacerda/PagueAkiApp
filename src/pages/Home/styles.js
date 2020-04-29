@@ -1,16 +1,14 @@
 import styled from 'styled-components';
+import { colors, metrics } from '../../styles';
 
-export const Container = styled.ScrollView.attrs({
+export const Scroll = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    alignItems: 'center',
+    width: '100%',
+  },
 })`
   flex: 1;
-  padding: 10px;
-  background: #f9f9f9;
-`;
-
-export const PageView = styled.View`
-  flex: 1;
-  margin-bottom: 63%;
 `;
 
 export const Logo = styled.Image`
@@ -21,13 +19,12 @@ export const Logo = styled.Image`
 `;
 
 export const Card = styled.View`
-  height: 27%;
+  height: 180px;
+  width: 100%;
   background: ${(props) =>
     props.cardColor ? `#${props.cardColor}` : '#77a93a'};
-  margin-right: 5%;
-  margin-left: 5%;
-  margin-bottom: 6%;
-  margin-top: 1%;
+  margin-bottom: 20px;
+  margin-top: 10px;
   border-radius: 20px;
 `;
 
@@ -46,8 +43,8 @@ export const CardTitleText = styled.Text`
 `;
 
 export const CardImage = styled.Image`
-  width: 21.5%;
-  height: 100%;
+  width: 65px;
+  height: 65px;
   border-radius: 10px;
 `;
 
