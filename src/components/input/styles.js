@@ -9,7 +9,8 @@ export const TextInput = styled.TextInput`
   color: ${colors.DARK_STRONG};
   padding-left: ${({ paddingLeft }) =>
     paddingLeft ? `${paddingLeft}` : metrics.MEDIUM}px;
-  margin-bottom: ${metrics.BIG}px;
+  margin-bottom: ${({ marginBot }) =>
+    marginBot ? metrics.XXXBIG : metrics.BIG};
   border-width: ${({ outline }) => (outline ? 1 : 0)}px;
   border-color: ${colors.GREY};
   width: 100%;
@@ -19,6 +20,7 @@ export const Title = styled.Text`
   color: ${colors.DARK};
   margin-bottom: ${metrics.XSMALL}px;
   font-size: 14px;
+  align-self: flex-start;
 `;
 
 export const ErrorText = styled.Text`

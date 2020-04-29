@@ -1,23 +1,16 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+import { colors, metrics } from '../../styles';
 
 export const Container = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
     alignItems: 'center',
     width: '100%',
+    padding: metrics.BIG,
   },
 })`
   flex: 1;
   background: #f9f9f9;
-`;
-
-export const Form = styled.View`
-  flex: 1;
-  flex-direction: column;
-  padding: 5px;
-  background: #000;
-  align-items: center;
 `;
 
 export const Logo = styled.Image`
@@ -25,7 +18,7 @@ export const Logo = styled.Image`
   height: 75px;
   background: #fff;
   align-self: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 `;
 
 export const AvatarView = styled.View`
@@ -60,57 +53,8 @@ export const AvatarText = styled.Text`
   font-size: 13.5px;
 `;
 
-export const FormInput = styled.View`
-  width: 90%;
-`;
-
-export const TextInstruction = styled.Text`
-  color: rgba(0, 0, 0, 0.55);
-  margin-top: 5px;
-  padding-left: 5px;
-`;
-
-export const Input = styled.TextInput.attrs({
-  placeholderTextColor: '#aaa',
-})`
-  height: 45px;
-  background: #F7F7F7
-  border-radius: 10px;
-  border-width: 1px;
-  border-color: #CDCDCD;
-  padding: 0 18px;
-  margin: 4px 0;
-  margin-bottom: 12px;
-`;
-
 export const ButtonsView = styled.View`
   padding-bottom: 30px;
-`;
-
-export const ButtonSignup = styled(RectButton)`
-  justify-content: center;
-  align-items: center;
-  background: #77a93a;
-  border-radius: 10px;
-  opacity: ${(props) => (props.loading ? 0.7 : 1)};
-  height: 40px;
   width: 90%;
-  margin-bottom: 5%;
-`;
-
-export const SignupButtonText = styled.Text`
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-`;
-
-export const ButtonCancel = styled.TouchableOpacity``;
-
-export const CancelText = styled.Text`
-  text-decoration: underline;
-  align-self: center;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 5%;
+  align-items: center;
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Input, Button } from '../../components';
+import { Input, Button, ButtonTouchable } from '../../components';
 import { useCommons } from '../../hooks';
 import { Container, Logo, ButtonsView } from './styles';
 import { Imgs } from '../../assets';
@@ -11,30 +11,38 @@ const Login = () => {
     userPass: '',
   });
 
-  const handleLogin = useCallback(() => {}, []);
-
-  const handleSigup = useCallback(() => navigation.navigate('Signup'), [
+  const handleLogin = useCallback(() => navigation.navigate('Home'), [
     navigation,
   ]);
 
-  const handleForgotPass = useCallback(() => {}, []);
+  const handleSignup = useCallback(() => navigation.navigate('Signup'), [
+    navigation,
+  ]);
+
+  const handleForgotPass = useCallback(() => { }, []);
 
   return (
     <Container>
       <Logo source={Imgs.LOGO_BRANCA} />
       <Input
-        placeholder="Email ou senha"
+        placeholder="Email ou telefone"
         value={forms.user}
         onChangeText={(text) => setForms({ ...forms, user: text })}
       />
       <Input
-        placeholder="Asdewq"
+        placeholder="******"
         secured
         value={forms.userPass}
         onChangeText={(text) => setForms({ ...forms, userPass: text })}
       />
       <ButtonsView>
-        <Button half text="CADASTRAR" handleOnPress={handleSigup} outline />
+        <ButtonTouchable
+          half
+          text="CADASTRAR"
+          handleOnPress={handleSignup}
+          outline
+          borderC
+        />
         <Button half text="ENTRAR" handleOnPress={handleLogin} />
       </ButtonsView>
       <Button
