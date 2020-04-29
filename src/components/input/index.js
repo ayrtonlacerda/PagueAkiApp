@@ -3,6 +3,7 @@ import React from 'react';
 import { TextInput, ErrorText, Title } from './styles';
 
 export const Input = ({
+  key,
   title,
   error,
   value,
@@ -17,7 +18,11 @@ export const Input = ({
     {error && <ErrorText>{error}</ErrorText>}
     <TextInput
       value={value}
-      onChangeText={onChangeText}
+      onChangeText={(text) =>
+        key
+          ? onChangeText((prevState) => ({ ...prevState, [key]: text }))
+          : onChangeText(text)
+      }
       secureTextEntry={secured}
       placeholder={placeholder}
       outline={outline}

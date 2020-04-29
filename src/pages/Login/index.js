@@ -23,9 +23,10 @@ const Login = () => {
     <Container>
       <Logo source={Imgs.LOGO_BRANCA} />
       <Input
+        key="user"
         placeholder="Email ou senha"
         value={forms.user}
-        onChangeText={(text) => setForms({ ...forms, user: text })}
+        onChangeText={setForms}
       />
       <Input
         placeholder="Asdewq"
