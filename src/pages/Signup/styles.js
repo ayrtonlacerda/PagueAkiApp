@@ -1,12 +1,14 @@
 import styled from 'styled-components/native';
-import { colors, metrics } from '../../styles';
+import { metrics } from '../../styles';
 
 export const Container = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
+    justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     padding: metrics.BIG,
+    paddingTop: metrics.XXXBIG,
   },
 })`
   flex: 1;
@@ -42,7 +44,9 @@ export const ButtonChangeAvatar = styled.TouchableOpacity`
   elevation: 10;
 `;
 
-export const Avatar = styled.Image`
+export const Avatar = styled.Image.attrs({
+  resizeMode: 'cover',
+})`
   width: 100%;
   height: 100%;
   border-radius: 200px;

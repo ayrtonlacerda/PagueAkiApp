@@ -3,7 +3,7 @@ import React from 'react';
 import { TextInput, ErrorText, Title } from './styles';
 
 export const Input = ({
-  key,
+  keyRef,
   title,
   error,
   value,
@@ -20,8 +20,8 @@ export const Input = ({
     <TextInput
       value={value}
       onChangeText={(text) =>
-        key
-          ? onChangeText((prevState) => ({ ...prevState, [key]: text }))
+        keyRef
+          ? onChangeText((prevState) => ({ ...prevState, [keyRef]: text }))
           : onChangeText(text)
       }
       secureTextEntry={secured}

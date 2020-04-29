@@ -1,8 +1,14 @@
-import React, { useState, useCallback } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useCallback, useEffect } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Input, Button } from '../../components';
+import * as yup from 'yup';
+// logic
+import { useCommons, useValidation } from '../../hooks';
+import { useAuth } from '../../global';
+// ui
 import { Imgs } from '../../assets';
+import { Input, Button } from '../../components';
 
 import {
   Container,
@@ -11,7 +17,6 @@ import {
   ButtonChangeAvatar,
   Avatar,
   AvatarText,
-  FormInput,
   ButtonsView,
 } from './styles';
 
@@ -27,83 +32,90 @@ const cameraOptions = {
   mediaType: 'mixed',
 };
 
-function Signup({ navigation }) {
-  // const [filePath, setFilePath] = useState({ data: '', uri: '' });
-  const [user, setUser] = useState({ name: '', email: '', tel: '', pass: '' });
-  const [fileUri, setFileUri] = useState('');
+const schema = {
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required().min(6),
+  phone: yup.string().required().min(11), // mascaras
+};
 
-  const changeAvatar = () => {
-    ImagePicker.showImagePicker(cameraOptions, (response) => {
-      console.log('Response = ', response);
+function Signup() {
+  const [err, validade] = useValidation(schema);
+  const { fetchAuth } = useAuth();
+  const { navigation } = useCommons();
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+  });
+  const [image, setImage] = useState(null);
 
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        setFileUri(response.uri);
-      }
-    });
-  };
+  useEffect(() => {
+    if (!err) {
+      fetchAuth(user, 'postSignUp');
+    }
+  }, [err]);
 
-  const handleSignUp = useCallback(() => navigation.navigate('Login'), [
-    navigation,
-  ]);
+  const changeAvatar = useCallback(() => {
+    ImagePicker.showImagePicker(cameraOptions, (res) => setImage(res));
+  }, [image]);
 
-  const handleCancel = useCallback(() => navigation.navigate('Login'), [
-    navigation,
-  ]);
+  const handleSignUp = useCallback(() => validade(user), [user, err]);
 
+  const handleCancel = useCallback(() => navigation.navigate('Login'), []);
+
+  console.log({ err });
   return (
     <Container>
       <Logo source={Imgs.LOGO_BRANCA} />
       <AvatarView>
-        <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
-          {fileUri ? (
-            <Avatar source={{ uri: fileUri }} style={{ resizeMode: 'cover' }} />
+        <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={image}>
+          {image ? (
+            <Avatar source={image} />
           ) : (
-              <>
-                <Icon name="photo-camera" size={25} />
-                <AvatarText>Escolher foto</AvatarText>
-              </>
-            )}
+            <>
+              <Icon name="photo-camera" size={25} />
+              <AvatarText>Escolher foto</AvatarText>
+            </>
+          )}
         </ButtonChangeAvatar>
       </AvatarView>
       <Input
+        keyRef="name"
+        onChangeText={setUser}
         value={user.name}
-        onChangeText={(text) => setUser(text)}
         placeholder="Usuário Exemplo"
         title="Nome"
         outline
+        error={err.name}
       />
       <Input
+        keyRef="email"
+        onChangeText={setUser}
         value={user.email}
-        onChangeText={(text) => setUser(text)}
         placeholder="exemplo@exemplo.com"
         title="Email"
         outline
+        error={err.email}
       />
       <Input
-        value={user.tel}
-        onChangeText={(text) => setUser(text)}
+        keyRef="phone"
+        onChangeText={setUser}
+        value={user.phone}
         placeholder="(61) 99999-8888"
         title="Celular"
         outline
+        error={err.phone}
       />
       <Input
-        value={user.pass}
-        onChangeText={(text) => setUser(text)}
+        keyRef="password"
+        onChangeText={setUser}
+        value={user.password}
         placeholder="Mínimo de 6 dígitos"
         title="Senha"
         outline
-      />
-      <Input
-        value={user.pass}
-        onChangeText={(text) => setUser(text)}
-        placeholder="******"
-        title="Repetir Senha"
-        outline
-        marginBot
+        error={err.password}
       />
       <ButtonsView>
         <Button text="ENTRAR" handleOnPress={handleSignUp} />

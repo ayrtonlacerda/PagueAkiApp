@@ -28,4 +28,5 @@ export const ErrorText = styled.Text`
   padding-left: ${metrics.XSMALL};
   color: ${colors.RED};
   margin-bottom: ${metrics.XXSMALL}px;
+  align-self: flex-start;
 `;

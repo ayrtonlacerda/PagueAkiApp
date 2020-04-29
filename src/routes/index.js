@@ -4,11 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Material from 'react-native-vector-icons/MaterialIcons';
+import { navigationRef } from './NavigationService';
 
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import Perfil from './pages/Perfil';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
+import Home from '../pages/Home';
+import Perfil from '../pages/Perfil';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,7 +53,7 @@ const TabsScreen = () => (
 
 export default function Routes() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />

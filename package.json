@@ -16,6 +16,7 @@
     "@react-navigation/native": "^5.1.6",
     "@react-navigation/stack": "^5.2.13",
     "@usereact/use-yup": "^1.0.0",
+    "axios": "^0.19.2",
     "formik": "^2.1.4",
     "react": "16.11.0",
     "react-native": "0.62.2",
@@ -27,7 +28,8 @@
     "react-native-vector-icons": "^6.6.0",
     "reactotron-react-native": "^5.0.0",
     "styled-components": "^5.1.0",
-    "yup": "^0.28.4"
+    "yup": "^0.28.4",
+    "zustand": "^2.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
