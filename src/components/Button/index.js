@@ -1,22 +1,16 @@
 import React from 'react';
-import { Container, Text, TextButton, Loading } from './styles';
+import { Container, Text } from './styles';
 
-export const Button = ({
+export const ButtonTouchable = ({
   half,
   text,
   outline,
   tbutton,
+  tcolor,
   loading,
   handleOnPress,
-}) =>
-  !tbutton ? (
+}) => (
     <Container outline={outline} half={half} onPress={handleOnPress}>
-      {loading ? (
-        <Loading loading={loading} outline={outline} />
-      ) : (
-        <Text outline={outline}>{text}</Text>
-      )}
+      <Text outline={outline}>{text}</Text>
     </Container>
-  ) : (
-    <TextButton onPress={handleOnPress}>{text}</TextButton>
   );

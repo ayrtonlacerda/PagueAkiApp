@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { colors, metrics } from '../../styles';
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled(RectButton)`
   justify-content: center;
   align-items: center;
   border-radius: ${metrics.RADIUS}px;
@@ -23,3 +23,15 @@ export const Text = styled.Text`
   font-weight: bold;
   text-align: center;
 `;
+
+export const TextButton = styled.Text`
+  font-style: ${({ tcolor }) => (tcolor ? 'normal' : 'italic')};
+  font-weight: ${({ tcolor }) => (tcolor ? 'normal' : 'bold')};
+  color: ${({ tcolor }) => (tcolor ? colors.DARK : colors.PRIMARY)};
+  text-decoration-line: ${({ tcolor }) => (tcolor ? 'underline' : 'none')};
+  margin-top: ${({ tcolor }) => (tcolor ? '20px' : 0)};
+`;
+
+export const Loading = styled.ActivityIndicator.attrs(({ outline }) => ({
+  color: outline ? colors.PRIMARY : colors.BACKGROUND,
+}))``;

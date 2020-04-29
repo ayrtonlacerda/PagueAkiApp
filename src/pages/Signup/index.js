@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Input, Button } from '../../components';
+import { Imgs } from '../../assets';
 
 import {
   Container,
@@ -9,35 +11,29 @@ import {
   ButtonChangeAvatar,
   Avatar,
   AvatarText,
-  Form,
   FormInput,
-  TextInstruction,
-  Input,
   ButtonsView,
-  ButtonSignup,
-  SignupButtonText,
-  ButtonCancel,
-  CancelText,
 } from './styles';
 
+const cameraOptions = {
+  title: 'Escolha uma das opções',
+  cancelButtonTitle: 'Cancelar',
+  takePhotoButtonTitle: 'Tirar uma foto',
+  chooseFromLibraryButtonTitle: 'Escolher uma foto',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+  mediaType: 'mixed',
+};
+
 function Signup({ navigation }) {
-  const [filePath, setFilePath] = useState({ data: '', uri: '' });
+  // const [filePath, setFilePath] = useState({ data: '', uri: '' });
   const [user, setUser] = useState({ name: '', email: '', tel: '', pass: '' });
   const [fileUri, setFileUri] = useState('');
 
-  function changeAvatar() {
-    const options = {
-      title: 'Escolha uma das opções',
-      cancelButtonTitle: 'Cancelar',
-      takePhotoButtonTitle: 'Tirar uma foto',
-      chooseFromLibraryButtonTitle: 'Escolher uma foto',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-      mediaType: 'mixed',
-    };
-    ImagePicker.showImagePicker(options, (response) => {
+  const changeAvatar = () => {
+    ImagePicker.showImagePicker(cameraOptions, (response) => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
@@ -45,29 +41,22 @@ function Signup({ navigation }) {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        // const source = { uri: response.uri };
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-        // alert(JSON.stringify(response));
-        // console.tron.log(JSON.stringify(response));
-        /* this.setState({
-          filePath: response,
-          fileData: response.data,
-          fileUri: response.uri,
-        }); */
-
         setFileUri(response.uri);
       }
     });
-  }
+  };
 
-  function handleSignUp() {
-    navigation.navigate('Login');
-  }
+  const handleSignUp = useCallback(() => navigation.navigate('Login'), [
+    navigation,
+  ]);
+
+  const handleCancel = useCallback(() => navigation.navigate('Login'), [
+    navigation,
+  ]);
 
   return (
     <Container>
-      <Logo source={require('../../assets/images/LogoBranca.png')} />
+      <Logo source={Imgs.LOGO_BRANCA} />
       <AvatarView>
         <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
           {fileUri ? (
@@ -80,113 +69,48 @@ function Signup({ navigation }) {
             )}
         </ButtonChangeAvatar>
       </AvatarView>
-      <FormInput>
-        <TextInstruction>Nome</TextInstruction>
-        <Input
-          value={user.name}
-          onChangeText={(text) => setUser(text)}
-          placeholder="Usuário Exemplo"
-        />
-      </FormInput>
-      <FormInput>
-        <TextInstruction>E-mail</TextInstruction>
-        <Input
-          value={user.email}
-          onChangeText={(text) => setUser(text)}
-          placeholder="exemplo@exemplo.com"
-        />
-      </FormInput>
-      <FormInput>
-        <TextInstruction>Celular</TextInstruction>
-        <Input
-          value={user.tel}
-          onChangeText={(text) => setUser(text)}
-          placeholder="(61) 99999-8888"
-        />
-      </FormInput>
-      <FormInput>
-        <TextInstruction>Senha</TextInstruction>
-        <Input
-          value={user.pass}
-          onChangeText={(text) => setUser(text)}
-          placeholder="Mínimo de 6 dígitos"
-        />
-      </FormInput>
-      <FormInput>
-        <TextInstruction>Repetir Senha</TextInstruction>
-        <Input
-          value={user.pass}
-          onChangeText={(text) => setUser(text)}
-          placeholder="******"
-        />
-      </FormInput>
-      <FormInput>
-        <TextInstruction>E-mail</TextInstruction>
-        <Input
-          value={user.pass}
-          onChangeText={(text) => setUser(text)}
-          placeholder="exemplo@exemplo.com"
-        />
-      </FormInput>
+      <Input
+        value={user.name}
+        onChangeText={(text) => setUser(text)}
+        placeholder="Usuário Exemplo"
+        title="Nome"
+        outline
+      />
+      <Input
+        value={user.email}
+        onChangeText={(text) => setUser(text)}
+        placeholder="exemplo@exemplo.com"
+        title="Email"
+        outline
+      />
+      <Input
+        value={user.tel}
+        onChangeText={(text) => setUser(text)}
+        placeholder="(61) 99999-8888"
+        title="Celular"
+        outline
+      />
+      <Input
+        value={user.pass}
+        onChangeText={(text) => setUser(text)}
+        placeholder="Mínimo de 6 dígitos"
+        title="Senha"
+        outline
+      />
+      <Input
+        value={user.pass}
+        onChangeText={(text) => setUser(text)}
+        placeholder="******"
+        title="Repetir Senha"
+        outline
+        marginBot
+      />
       <ButtonsView>
-        <ButtonSignup onPress={handleSignUp}>
-          <SignupButtonText>REGISTRAR</SignupButtonText>
-        </ButtonSignup>
-        <ButtonCancel onPress={handleSignUp}>
-          <CancelText>Cancelar</CancelText>
-        </ButtonCancel>
+        <Button text="ENTRAR" handleOnPress={handleSignUp} />
+        <Button text="Cancelar" tbutton tcolor handleOnPress={handleCancel} />
       </ButtonsView>
     </Container>
   );
 }
 
 export default Signup;
-
-/*
-<FormInput>
-          <TextInstruction>Nome</TextInstruction>
-          <Input
-            value={user.name}
-            onChangeText={(text) =>
-              setUser((prevState) => ({
-                ...prevState,
-                name: text,
-              }))
-            }
-            placeholder="Usuário Exemplo"
-          />
-        </FormInput>
-        <FormInput>
-          <TextInstruction>E-mail</TextInstruction>
-          <Input
-            value={user.pass}
-            onChangeText={(text) => setUser(text)}
-            placeholder="exemplo@exemplo.com"
-          />
-        </FormInput>
-        <FormInput>
-          <TextInstruction>Telefone</TextInstruction>
-          <Input
-            value={user.pass}
-            onChangeText={(text) => setUser(text)}
-            placeholder="(61) XXXXX-XXXX"
-          />
-        </FormInput>
-        <FormInput>
-          <TextInstruction>Senha</TextInstruction>
-          <Input
-            value={user.pass}
-            onChangeText={(text) => setUser(text)}
-            placeholder="Mínimo de 6 digitos"
-            secureTextEntry
-          />
-        </FormInput>
-        <FormInput>
-          <TextInstruction>Repetir Senha</TextInstruction>
-          <Input
-            value={user.pass}
-            onChangeText={(text) => setUser(text)}
-            placeholder="Senha"
-            secureTextEntry
-          />
-        </FormInput> */

@@ -7,7 +7,7 @@ export const Container = styled.View`
   background: ${colors.BACKGROUND};
   justify-content: center;
   align-items: center;
-  padding: ${metrics.BIG}px;
+  padding: ${metrics.XBIG}px;
 `;
 
 export const Logo = styled.Image.attrs({

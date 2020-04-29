@@ -11,6 +11,7 @@ export const Input = ({
   secured,
   placeholder = '',
   paddingLeft = '',
+  marginBot = '',
   onChangeText,
 }) => (
   <>
