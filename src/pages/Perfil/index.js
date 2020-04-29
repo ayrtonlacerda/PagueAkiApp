@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Container } from '../../components';
 
 import {
-  Container,
   Logout,
   LogoutText,
   AvatarView,
@@ -65,7 +65,7 @@ export default function Perfil() {
   const darkGrey = '5B5B5B';
 
   return (
-    <Container>
+    <Container noCenter>
       <Logout>
         <LogoutText>SAIR</LogoutText>
       </Logout>

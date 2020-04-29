@@ -16,8 +16,8 @@ export const LogoutText = styled.Text`
 `;
 
 export const AvatarView = styled.View`
+  height: 100px;
   width: 100%;
-  height: 20%;
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
@@ -25,8 +25,8 @@ export const AvatarView = styled.View`
 `;
 
 export const ButtonChangeAvatar = styled.TouchableOpacity`
-  width: 36%;
-  height: ${(props) => (props.photoIsSet ? '95%' : '95%')};
+  width: 100px;
+  height: ${(props) => (props.photoIsSet ? '100px' : '100px')};
   margin-top: ${(props) => (props.photoIsSet ? '5px' : 0)};
   border-radius: 200px;
   border-width: 3px;
@@ -56,7 +56,7 @@ export const Avatar = styled.Image`
 `;
 
 export const InfosView = styled.View`
-  padding: 8px;
+  width: 100%;
 `;
 
 export const TitleText = styled.Text`

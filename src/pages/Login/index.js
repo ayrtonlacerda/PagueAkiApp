@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { Input, Button, ButtonTouchable } from '../../components';
+import { Input, Button, ButtonTouchable, Container } from '../../components';
 import { useCommons } from '../../hooks';
-import { Container, Logo, ButtonsView } from './styles';
+import { Logo, ButtonsView } from './styles';
 import { Imgs } from '../../assets';
 
 const Login = () => {
