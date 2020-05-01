@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Container } from '../../components';
+import { Container, Card } from '../../components';
+import { Imgs } from '../../assets';
+import { colors } from '../../styles';
 
 import {
   Logout,
@@ -16,10 +18,20 @@ import {
   Line,
   Services,
   ServicesText,
-  ServiceCard,
-  ServiceCardImage,
-  ServiceCardText,
+  Scroll,
 } from './styles';
+
+const objTeste = [
+  {
+    texto: 'Título Teste',
+  },
+  {
+    texto: 'Título Teste 2',
+  },
+  {
+    texto: 'Título Teste 3',
+  },
+];
 
 export default function Perfil() {
   const [fileUri, setFileUri] = useState('');
@@ -60,10 +72,6 @@ export default function Perfil() {
     });
   }
 
-  const green = '77A93A';
-  const grey = 'CDCDCD';
-  const darkGrey = '5B5B5B';
-
   return (
     <Container noCenter>
       <Logout>
@@ -87,26 +95,20 @@ export default function Perfil() {
         <Line />
         <Services>
           <ServicesText>Serviços Ativos</ServicesText>
-          <ServiceCard cardColor={green}>
-            <ServiceCardText>What is Lorem Ipsum</ServiceCardText>
-            <ServiceCardImage
-              source={require('../../assets/images/LogoBranca.png')}
+          <Scroll>
+            {objTeste.map((data) => (
+              <Card cardText={data.texto} source={Imgs.LOGO_BRANCA} />
+            ))}
+            <Card
+              cardText="Teste"
+              cardColor={colors.ORANGE}
+              source={Imgs.LOGO_BRANCA}
             />
-          </ServiceCard>
-          <ServiceCard cardColor={grey}>
-            <ServiceCardText>What is Lorem Ipsum</ServiceCardText>
-            <ServiceCardImage
-              source={require('../../assets/images/LogoBranca.png')}
-            />
-          </ServiceCard>
-          <ServiceCard cardColor={darkGrey}>
-            <ServiceCardText>What is Lorem Ipsum</ServiceCardText>
-            <ServiceCardImage
-              source={require('../../assets/images/LogoBranca.png')}
-            />
-          </ServiceCard>
+          </Scroll>
         </Services>
       </InfosView>
     </Container>
   );
 }
+
+/*  */

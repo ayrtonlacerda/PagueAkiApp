@@ -6,9 +6,9 @@ export const PageContainer = styled.View`
   display: flex;
   flex: 1;
   background: ${colors.BACKGROUND};
-  justify-content: ${({ noCenter }) => (noCenter ? 'center' : 'center')};
+  justify-content: ${({ noCenter }) => (noCenter ? 'flex-start' : 'center')};
   align-items: ${({ noCenter }) => (noCenter ? 'flex-start' : 'center')};
   padding: ${({ noPadding }) =>
     noPadding ? '0 0 0 0' : `0px ${metrics.XBIG}px 0px ${metrics.XBIG}px`};
-  padding-top: ${Platform.OS === 'ios' ? metrics.SAFEVIEW : 0}px;
+  padding-top: ${Platform.OS === 'ios' ? metrics.SAFEVIEW : metrics.SMALL}px;
 `;

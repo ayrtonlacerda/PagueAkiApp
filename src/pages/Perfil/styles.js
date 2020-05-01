@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.View`
-  flex: 1;
-  padding: 15px;
-  background: #f9f9f9;
-`;
 export const Logout = styled.TouchableOpacity`
   align-self: flex-end;
 `;
@@ -81,30 +76,16 @@ export const Line = styled.View`
 export const Services = styled.View`
   margin-top: 23px;
 `;
+
 export const ServicesText = styled.Text`
   color: #5b5b5b;
   font-size: 15px;
 `;
-export const ServiceCard = styled.View`
-  flex-direction: row;
-  height: 65px;
-  align-items: center;
-  padding: 7px;
-  padding-left: 15px;
-  border-radius: 15px;
-  margin-top: 20px;
-  background: ${(props) =>
-    props.cardColor ? `#${props.cardColor}` : '#77a93a'};
-`;
-export const ServiceCardImage = styled.Image`
-  width: 21.5%;
-  height: 100%;
-  border-radius: 10px;
-  margin-right: 8px;
-`;
-export const ServiceCardText = styled.Text`
-  flex: 1;
-  color: #fff;
-  font-weight: bold;
-  font-size: 19px;
-`;
+export const Scroll = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+})``;
