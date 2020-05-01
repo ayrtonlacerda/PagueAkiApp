@@ -11,13 +11,6 @@ export const Scroll = styled.ScrollView.attrs({
   flex: 1;
 `;
 
-export const Logo = styled.Image`
-  width: 73%;
-  height: 13%;
-  background: #fff;
-  align-self: center;
-`;
-
 export const Card = styled.View`
   height: 180px;
   width: 100%;

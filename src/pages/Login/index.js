@@ -1,7 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import { Input, Button, ButtonTouchable, Container } from '../../components';
+import {
+  Input,
+  Button,
+  ButtonTouchable,
+  Container,
+  Logo,
+} from '../../components';
 import { useCommons } from '../../hooks';
-import { Logo, ButtonsView } from './styles';
+import { ButtonsView } from './styles';
 import { Imgs } from '../../assets';
 
 const Login = () => {
@@ -23,7 +29,7 @@ const Login = () => {
 
   return (
     <Container>
-      <Logo source={Imgs.LOGO_BRANCA} />
+      <Logo big marBottom />
       <Input
         placeholder="Email ou telefone"
         value={forms.user}

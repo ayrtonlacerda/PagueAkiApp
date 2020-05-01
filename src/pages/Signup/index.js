@@ -1,12 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Input, Button } from '../../components';
-import { Imgs } from '../../assets';
+import { Input, Button, Logo } from '../../components';
 
 import {
   Container,
-  Logo,
   AvatarView,
   ButtonChangeAvatar,
   Avatar,
@@ -56,7 +54,7 @@ function Signup({ navigation }) {
 
   return (
     <Container>
-      <Logo source={Imgs.LOGO_BRANCA} />
+      <Logo />
       <AvatarView>
         <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
           {fileUri ? (

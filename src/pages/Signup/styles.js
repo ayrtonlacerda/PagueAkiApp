@@ -13,14 +13,6 @@ export const Container = styled.ScrollView.attrs({
   background: #f9f9f9;
 `;
 
-export const Logo = styled.Image`
-  width: 200px;
-  height: 75px;
-  background: #fff;
-  align-self: center;
-  margin-bottom: 10px;
-`;
-
 export const AvatarView = styled.View`
   width: 100px;
   height: 100px;

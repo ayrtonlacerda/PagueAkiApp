@@ -1,10 +1,9 @@
 import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
-import { Container } from '../../components';
+import { Container, Logo } from '../../components';
 
 import {
   Scroll,
-  Logo,
   Card,
   CardTopView,
   CardTitleText,
@@ -26,7 +25,7 @@ export default function Home() {
 
   return (
     <Container>
-      <Logo source={require('../../assets/images/LogoBranca.png')} />
+      <Logo />
       <Scroll>
         <TouchableWithoutFeedback onPress={() => { }}>
           <Card cardColor={green}>
