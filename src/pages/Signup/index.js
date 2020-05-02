@@ -1,17 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import ImagePicker from 'react-native-image-picker';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Input, Button, Logo } from '../../components';
+import { Input, Button, Logo, Avatar } from '../../components';
+import { useCommons } from '../../hooks';
 
-import {
-  Container,
-  AvatarView,
-  ButtonChangeAvatar,
-  Avatar,
-  AvatarText,
-  FormInput,
-  ButtonsView,
-} from './styles';
+import { Container, ButtonsView } from './styles';
 
 const cameraOptions = {
   title: 'Escolha uma das opções',
@@ -25,8 +17,8 @@ const cameraOptions = {
   mediaType: 'mixed',
 };
 
-function Signup({ navigation }) {
-  // const [filePath, setFilePath] = useState({ data: '', uri: '' });
+function Signup() {
+  const { navigation } = useCommons();
   const [user, setUser] = useState({ name: '', email: '', tel: '', pass: '' });
   const [fileUri, setFileUri] = useState('');
 
@@ -55,18 +47,11 @@ function Signup({ navigation }) {
   return (
     <Container>
       <Logo />
-      <AvatarView>
-        <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
-          {fileUri ? (
-            <Avatar source={{ uri: fileUri }} style={{ resizeMode: 'cover' }} />
-          ) : (
-              <>
-                <Icon name="photo-camera" size={25} />
-                <AvatarText>Escolher foto</AvatarText>
-              </>
-            )}
-        </ButtonChangeAvatar>
-      </AvatarView>
+      <Avatar
+        handleOnPress={changeAvatar}
+        source={{ uri: fileUri }}
+        photoIsSet={fileUri}
+      />
       <Input
         value={user.name}
         onChangeText={(text) => setUser(text)}

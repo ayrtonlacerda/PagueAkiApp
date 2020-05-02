@@ -33,40 +33,29 @@ const objTeste = [
   },
 ];
 
+const options = {
+  title: 'Escolha uma das opções',
+  cancelButtonTitle: 'Cancelar',
+  takePhotoButtonTitle: 'Tirar uma foto',
+  chooseFromLibraryButtonTitle: 'Escolher uma foto',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+  mediaType: 'mixed',
+};
+
 export default function Perfil() {
   const [fileUri, setFileUri] = useState('');
 
   function changeAvatar() {
-    const options = {
-      title: 'Escolha uma das opções',
-      cancelButtonTitle: 'Cancelar',
-      takePhotoButtonTitle: 'Tirar uma foto',
-      chooseFromLibraryButtonTitle: 'Escolher uma foto',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-      mediaType: 'mixed',
-    };
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
-
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        // const source = { uri: response.uri };
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-        // alert(JSON.stringify(response));
-        // console.tron.log(JSON.stringify(response));
-        /* this.setState({
-          filePath: response,
-          fileData: response.data,
-          fileUri: response.uri,
-        }); */
-
         setFileUri(response.uri);
       }
     });
@@ -80,7 +69,11 @@ export default function Perfil() {
       <AvatarView>
         <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>
           {fileUri ? (
-            <Avatar source={{ uri: fileUri }} style={{ resizeMode: 'cover' }} />
+            <Avatar
+              handleOnPress={changeAvatar}
+              source={{ uri: fileUri }}
+              photoIsSet={fileUri}
+            />
           ) : null}
         </ButtonChangeAvatar>
         <ButtonChange>

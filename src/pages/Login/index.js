@@ -8,7 +8,6 @@ import {
 } from '../../components';
 import { useCommons } from '../../hooks';
 import { ButtonsView } from './styles';
-import { Imgs } from '../../assets';
 
 const Login = () => {
   const { navigation } = useCommons();
