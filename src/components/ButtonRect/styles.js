@@ -12,8 +12,9 @@ export const Container = styled(RectButton)`
   border-width: ${({ outline }) => (outline ? 2 : 0)}px;
   border-color: ${({ outline }) =>
     outline ? colors.PRIMARY : colors.BACKGROUND};
-  background: ${({ outline }) =>
-    outline ? colors.BACKGROUND : colors.PRIMARY};
+  background: ${({ color }) => color || colors.PRIMARY};
+  margin: ${({ margin }) => margin || 0}px 0px ${({ margin }) => margin || 0}px
+    0px;
 `;
 
 export const Text = styled.Text`

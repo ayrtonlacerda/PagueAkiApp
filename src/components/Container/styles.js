@@ -5,7 +5,7 @@ import { colors, metrics } from '../../styles';
 export const PageContainer = styled.View`
   display: flex;
   flex: 1;
-  background: ${colors.BACKGROUND};
+  background: ${({ background }) => background || colors.BACKGROUND};
   justify-content: ${({ noCenter }) => (noCenter ? 'flex-start' : 'center')};
   align-items: ${({ noCenter }) => (noCenter ? 'flex-start' : 'center')};
   padding: ${({ noPadding }) =>

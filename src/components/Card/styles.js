@@ -59,8 +59,8 @@ export const ServiceCard = styled.View`
 `;
 
 export const ServiceCardImage = styled.Image`
-  width: 21.5%;
-  height: 100%;
+  width: 60px;
+  height: 55px;
   border-radius: 10px;
   margin-right: 8px;
 `;

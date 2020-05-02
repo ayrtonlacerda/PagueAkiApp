@@ -15,7 +15,6 @@ export const AvatarView = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
   flex-direction: row;
 `;
 
@@ -74,13 +73,14 @@ export const Line = styled.View`
 `;
 
 export const Services = styled.View`
-  margin-top: 23px;
+  margin-top: 5px;
 `;
 
 export const ServicesText = styled.Text`
   color: #5b5b5b;
   font-size: 15px;
 `;
+
 export const Scroll = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Container, Logo, Card } from '../../components';
+import { useCommons } from '../../hooks';
 import { Imgs } from '../../assets';
 import { colors } from '../../styles';
 
@@ -23,6 +24,11 @@ const TextDescription =
   'There are many variations of passages of Lorem Ipsum available, but the majority believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidde';
 
 export default function Home() {
+  const { navigation } = useCommons();
+  const handleProduct = useCallback(() => navigation.navigate('Product'), [
+    navigation,
+  ]);
+
   return (
     <Container>
       <Logo />
@@ -33,6 +39,7 @@ export default function Home() {
             source={Imgs.LOGO_BRANCA}
             titleText={data.texto}
             descriptionText={data.descricao}
+            handleOnPress={handleProduct}
           />
         ))}
         <Card
