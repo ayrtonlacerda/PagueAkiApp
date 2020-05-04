@@ -7,18 +7,10 @@ import * as yup from 'yup';
 import { useCommons, useValidation } from '../../hooks';
 import { useAuth } from '../../global';
 // ui
-import { Imgs } from '../../assets';
-import { Input, Button } from '../../components';
+import { Input, Button, Logo, Avatar } from '../../components';
+import { useCommons } from '../../hooks';
 
-import {
-  Container,
-  Logo,
-  AvatarView,
-  ButtonChangeAvatar,
-  Avatar,
-  AvatarText,
-  ButtonsView,
-} from './styles';
+import { Container, ButtonsView } from './styles';
 
 const cameraOptions = {
   title: 'Escolha uma das opções',
@@ -68,19 +60,12 @@ function Signup() {
   console.log({ err });
   return (
     <Container>
-      <Logo source={Imgs.LOGO_BRANCA} />
-      <AvatarView>
-        <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={image}>
-          {image ? (
-            <Avatar source={image} />
-          ) : (
-            <>
-              <Icon name="photo-camera" size={25} />
-              <AvatarText>Escolher foto</AvatarText>
-            </>
-          )}
-        </ButtonChangeAvatar>
-      </AvatarView>
+      <Logo />
+      <Avatar
+        handleOnPress={changeAvatar}
+        source={{ uri: fileUri }}
+        photoIsSet={fileUri}
+      />
       <Input
         keyRef="name"
         onChangeText={setUser}

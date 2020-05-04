@@ -2,12 +2,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import * as yup from 'yup';
 // logic
-import { useCommons, useValidation } from '../../hooks';
 import { useAuth } from '../../global';
 // ui
-import { Container, Logo, ButtonsView, Error } from './styles';
-import { Input, Button, ButtonTouchable } from '../../components';
-import { Imgs } from '../../assets';
+import {
+  Input,
+  Button,
+  ButtonTouchable,
+  Container,
+  Logo,
+} from '../../components';
+import { ButtonsView } from './styles';
+import { useCommons, useValidation } from '../../hooks';
 
 const schema = {
   email: yup.string().email().required(),
@@ -39,7 +44,7 @@ const Login = () => {
 
   return (
     <Container>
-      <Logo source={Imgs.LOGO_BRANCA} />
+      <Logo big marBottom />
       <Error>{error}</Error>
       <Input
         keyRef="email"
