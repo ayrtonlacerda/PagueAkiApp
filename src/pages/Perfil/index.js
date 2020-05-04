@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useCommons } from '../../hooks';
 import { Container } from '../../components';
 
 import {
@@ -19,12 +20,14 @@ import {
   ServiceCard,
   ServiceCardImage,
   ServiceCardText,
+  IconExit,
 } from './styles';
 
 export default function Perfil() {
+  const { navigation } = useCommons();
   const [fileUri, setFileUri] = useState('');
 
-  function changeAvatar() {
+  const changeAvatar = () => {
     const options = {
       title: 'Escolha uma das opções',
       cancelButtonTitle: 'Cancelar',
@@ -58,7 +61,9 @@ export default function Perfil() {
         setFileUri(response.uri);
       }
     });
-  }
+  };
+
+  const handleLogout = useCallback(() => navigation.navigate('Login'), []);
 
   const green = '77A93A';
   const grey = 'CDCDCD';
@@ -66,8 +71,8 @@ export default function Perfil() {
 
   return (
     <Container noCenter>
-      <Logout>
-        <LogoutText>SAIR</LogoutText>
+      <Logout onPress={handleLogout}>
+        <IconExit />
       </Logout>
       <AvatarView>
         <ButtonChangeAvatar onPress={changeAvatar} photoIsSet={fileUri}>

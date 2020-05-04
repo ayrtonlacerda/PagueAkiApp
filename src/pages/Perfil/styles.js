@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { colors } from '../../styles';
 
 export const Container = styled.View`
   flex: 1;
@@ -14,6 +16,12 @@ export const LogoutText = styled.Text`
   font-weight: bold;
   font-size: 14px;
 `;
+
+export const IconExit = styled(Icon).attrs({
+  name: 'exit-to-app',
+  size: 30,
+  color: colors.DARK_STRONG,
+})``;
 
 export const AvatarView = styled.View`
   height: 100px;
@@ -81,10 +89,12 @@ export const Line = styled.View`
 export const Services = styled.View`
   margin-top: 23px;
 `;
+
 export const ServicesText = styled.Text`
   color: #5b5b5b;
   font-size: 15px;
 `;
+
 export const ServiceCard = styled.View`
   flex-direction: row;
   height: 65px;
