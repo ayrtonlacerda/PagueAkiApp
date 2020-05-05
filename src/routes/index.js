@@ -10,6 +10,8 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Home from '../pages/Home';
 import Perfil from '../pages/Perfil';
+import Product from '../pages/Product';
+import { Forms } from '../pages';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,10 +56,12 @@ const TabsScreen = () => (
 export default function Routes() {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator headerMode="none">
+      <Stack.Navigator headerMode="none" initialRouteName="Forms">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Home" component={TabsScreen} />
+        <Stack.Screen name="Product" component={Product} />
+        <Stack.Screen name="Forms" component={Forms} />
       </Stack.Navigator>
     </NavigationContainer>
   );

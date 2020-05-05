@@ -11,7 +11,7 @@ import {
   Container,
   Logo,
 } from '../../components';
-import { ButtonsView } from './styles';
+import { ButtonsView, Error } from './styles';
 import { useCommons, useValidation } from '../../hooks';
 
 const schema = {
@@ -28,6 +28,7 @@ const Login = () => {
     password: '',
   });
 
+  navigation.navigate('Home');
   useEffect(() => {
     if (!err) {
       fetchAuth(forms, 'postSignIn');
@@ -40,6 +41,7 @@ const Login = () => {
     navigation,
   ]);
 
+  console.log({ loading });
   const handleForgotPass = useCallback(() => {}, []);
 
   return (

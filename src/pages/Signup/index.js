@@ -8,8 +8,6 @@ import { useCommons, useValidation } from '../../hooks';
 import { useAuth } from '../../global';
 // ui
 import { Input, Button, Logo, Avatar } from '../../components';
-import { useCommons } from '../../hooks';
-
 import { Container, ButtonsView } from './styles';
 
 const cameraOptions = {
@@ -63,8 +61,8 @@ function Signup() {
       <Logo />
       <Avatar
         handleOnPress={changeAvatar}
-        source={{ uri: fileUri }}
-        photoIsSet={fileUri}
+        source={image}
+        photoIsSet={image && image.uri}
       />
       <Input
         keyRef="name"
