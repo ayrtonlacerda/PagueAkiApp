@@ -2,8 +2,9 @@ import React from 'react';
 
 import { TextInput, ErrorText, Title } from './styles';
 
-export const Input = ({
+export const InputMask = ({
   keyRef,
+  mask,
   title,
   error,
   value,
@@ -19,6 +20,7 @@ export const Input = ({
     {title && <Title>{title}</Title>}
     {error && <ErrorText>{error}</ErrorText>}
     <TextInput
+      refInput={(ref) => ref}
       value={value}
       onChangeText={(text) =>
         keyRef
@@ -29,6 +31,7 @@ export const Input = ({
       placeholder={placeholder}
       outline={outline}
       paddingLeft={paddingLeft}
+      mask={mask}
       keyboardType={keyboardType}
     />
   </>

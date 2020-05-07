@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useCommons } from '../../hooks';
 import { Container, Button } from '../../components';
 import {
   Scroll,
@@ -31,6 +32,8 @@ const objTeste = [
 ];
 
 export default function Product() {
+  const { navigation } = useCommons();
+  const handleConfirm = useCallback(() => navigation.navigate('Forms'), []);
   return (
     <Container background={colors.PRIMARY}>
       <ProductImage source={Imgs.LOGO_BRANCA} />
@@ -43,7 +46,12 @@ export default function Product() {
           </ProductTextView>
         ))}
       </Scroll>
-      <Button color={colors.DARK} margin={metrics.MEDIUM} text="CONTRATAR" />
+      <Button
+        color={colors.DARK}
+        margin={metrics.MEDIUM}
+        text="CONTRATAR"
+        handleOnPress={handleConfirm}
+      />
     </Container>
   );
 }
