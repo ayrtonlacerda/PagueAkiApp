@@ -35,13 +35,16 @@ const Login = () => {
     }
   }, [err]);
 
-  const handleLogin = useCallback(() => validade(forms), [forms]);
+  const handleLogin = useCallback(() => validade(forms), [
+    forms,
+    navigation,
+    err,
+  ]);
 
   const handleSignup = useCallback(() => navigation.navigate('Signup'), [
     navigation,
   ]);
 
-  console.log({ loading });
   const handleForgotPass = useCallback(() => {}, []);
 
   return (

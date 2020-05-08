@@ -20,6 +20,7 @@ import {
   Services,
   ServicesText,
   Scroll,
+  IconExit,
 } from './styles';
 
 const objTeste = [
@@ -61,7 +62,9 @@ export default function Perfil() {
         setFileUri(response.uri);
       }
     });
-  };
+  }
+
+  const handleLogout = useCallback(() => navigation.navigate('Login'), []);
 
   return (
     <Container noCenter>
