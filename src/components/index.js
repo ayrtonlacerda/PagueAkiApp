@@ -1,4 +1,4 @@
-export * from './Input';
+export * from './input';
 export * from './ButtonRect';
 export * from './Button';
 export * from './Container';
