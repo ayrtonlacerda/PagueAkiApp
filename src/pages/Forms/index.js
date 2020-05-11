@@ -14,7 +14,7 @@ import {
   InputMask, // change name
   Container,
   ButtonTouchable,
-  Avatar,
+  RadioButton,
 } from '../../components';
 
 /*
@@ -56,6 +56,11 @@ const FORM = [
         title: 'RG',
         mask: '[000000]-[00]',
         type: 'numeric',
+      },
+      {
+        name: 'Radio',
+        key: 'Radio',
+        title: 'Radio Button Test',
       },
     ],
   },
@@ -140,6 +145,7 @@ const Forms = () => {
   const { navigation } = useCommons();
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     FORM.map((step) =>
@@ -149,7 +155,7 @@ const Forms = () => {
     );
   }, []);
 
-  const handleFinish = () => {};
+  const handleFinish = () => { };
 
   const handleNextStep = useCallback(() => {
     if (index < FORM.length - 1) setIndex(index + 1);
@@ -169,6 +175,15 @@ const Forms = () => {
     () => (index < FORM.length - 1 ? 'PRÓXIMO' : 'FINALIZAR'),
     [index]
   );
+
+  const handleRadioButton = useCallback(() => {
+    setChecked(!checked);
+  }, [checked]);
+
+  /* const handleRadioButton = () => {
+    setChecked(!checked);
+    console.tron.log('entrei aqui', checked);
+  }; */
 
   console.log({ form });
   return (
@@ -206,6 +221,16 @@ const Forms = () => {
                 onChangeText={setForm}
                 mask={component.mask}
                 keyboardType={component?.type}
+              />
+            );
+          }
+          if (component.name === 'Radio') {
+            return (
+              <RadioButton
+                value={form[component.key]}
+                title={component.title}
+                handlePress={handleRadioButton}
+                checked={checked}
               />
             );
           }
