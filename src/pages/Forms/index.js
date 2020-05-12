@@ -9,15 +9,12 @@ import {
   ButtonTouchable,
   RadioButton,
   Picker,
+  Camera,
 } from '../../components';
 
 import ProgressForm from './components/ProgressForm';
 
 import { Schemas } from '../../util';
-/*
-  map step
-    map componentes
-*/
 
 const FORM = [
   {
@@ -165,7 +162,7 @@ const Forms = () => {
     );
   }, []);
 
-  const handleFinish = () => {};
+  const handleFinish = () => { };
 
   const handleNextStep = useCallback(() => {
     if (index < FORM.length - 1) setIndex(index + 1);
@@ -241,6 +238,15 @@ const Forms = () => {
                 options={component.options}
                 title={component.title}
                 onChangeOption={setForm}
+              />
+            );
+          }
+          if (component.name === 'Image') {
+            return (
+              <Camera
+                keyRef={component.key}
+                value={form[component.key]}
+                title={component.title}
               />
             );
           }

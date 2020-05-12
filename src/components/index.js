@@ -8,3 +8,4 @@ export * from './Avatar';
 export * from './RadioButton';
 export * from './Picker';
 export * from './InputMask';
+export * from './Camera';

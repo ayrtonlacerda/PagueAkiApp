@@ -33,13 +33,13 @@ export const RadioButton = ({
       {error && <ErrorText>{error}</ErrorText>}
       <RadioContainer>
         <OptionContainer
-          onPress={!checked ? () => {} : handleRadioButton}
+          onPress={!checked ? () => { } : handleRadioButton}
           checked={checked}
         >
           <OptionText>{opt1 || 'SIM'}</OptionText>
         </OptionContainer>
         <OptionContainer
-          onPress={!checked ? handleRadioButton : () => {}}
+          onPress={!checked ? handleRadioButton : () => { }}
           checked={!checked}
         >
           <OptionText>{opt2 || 'NÃO'}</OptionText>
