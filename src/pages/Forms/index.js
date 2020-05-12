@@ -1,14 +1,6 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useCommons } from '../../hooks';
-import {
-  MainContainer,
-  ProgressContainer,
-  ButtonContainer,
-  // progress
-  Line,
-  Ball,
-  MiniBall,
-} from './styles';
+import { MainContainer, ProgressContainer, ButtonContainer } from './styles';
 import {
   Input,
   InputMask, // change name
@@ -18,6 +10,7 @@ import {
   Picker,
 } from '../../components';
 
+import ProgressForm from './components/ProgressForm';
 /*
   map step
     map componentes
@@ -162,7 +155,7 @@ const Forms = () => {
     );
   }, []);
 
-  const handleFinish = () => { };
+  const handleFinish = () => {};
 
   const handleNextStep = useCallback(() => {
     if (index < FORM.length - 1) setIndex(index + 1);
@@ -197,14 +190,7 @@ const Forms = () => {
 
   return (
     <Container>
-      <ProgressContainer>
-        {FORM.map((_, i) => (
-          <>
-            <Ball filled={i < index}>{i === index && <MiniBall />}</Ball>
-            {i < FORM.length - 1 && <Line />}
-          </>
-        ))}
-      </ProgressContainer>
+      <ProgressForm form={FORM} index={index} />
       <MainContainer>
         {FORM[index].components.map((component) => {
           if (component.name === 'Input') {
@@ -220,7 +206,6 @@ const Forms = () => {
             );
           }
           if (component.name === 'InputMask') {
-            console.log({ component });
             return (
               <InputMask
                 value={form[component.key]}

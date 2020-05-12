@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import TextInputMask from 'react-native-text-input-mask';
+import styled from 'styled-components/native';
 import { colors, metrics } from '../../styles';
 
 export const Title = styled.Text`
@@ -27,7 +26,7 @@ export const RadioContainer = styled.View`
   border-radius: ${metrics.RADIUS};
 `;
 
-export const OptionContainer = styled.View`
+export const OptionContainer = styled.TouchableOpacity`
   flex: 1;
   align-items: center;
   justify-content: center;

@@ -79,6 +79,9 @@ target 'PagueAki' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+ # use_frameworks!
+  pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
+
   target 'PagueAkiTests' do
     inherit! :complete
     # Pods for testing

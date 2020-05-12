@@ -13,11 +13,17 @@ export const RadioButton = ({ title, error, handlePress, checked }) => (
     {title && <Title>{title}</Title>}
     {error && <ErrorText>{error}</ErrorText>}
     <RadioContainer>
-      <OptionContainer onPress={handlePress} checked={checked}>
-        <OptionText onPress={handlePress}>SIM</OptionText>
+      <OptionContainer
+        onPress={!checked ? () => {} : handlePress}
+        checked={checked}
+      >
+        <OptionText>SIM</OptionText>
       </OptionContainer>
-      <OptionContainer onPress={handlePress} checked={!checked}>
-        <OptionText onPress={handlePress}>NÃO</OptionText>
+      <OptionContainer
+        onPress={!checked ? handlePress : () => {}}
+        checked={!checked}
+      >
+        <OptionText>NÃO</OptionText>
       </OptionContainer>
     </RadioContainer>
   </>

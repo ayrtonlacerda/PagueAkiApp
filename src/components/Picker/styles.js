@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import TextInputMask from 'react-native-text-input-mask';
 import { colors, metrics } from '../../styles';
 
 export const Title = styled.Text`
