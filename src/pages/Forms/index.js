@@ -12,6 +12,8 @@ import {
 } from '../../components';
 
 import ProgressForm from './components/ProgressForm';
+
+import { Schemas } from '../../util';
 /*
   map step
     map componentes
@@ -147,11 +149,14 @@ const FORM = [
   },
 ];
 
+// lidar com o inputmask
+
 const Forms = () => {
   const { navigation } = useCommons();
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
-  const [checked, setChecked] = useState(false);
+
+  // constroi campos com chaves
   useEffect(() => {
     FORM.map((step) =>
       step.components.map((item) =>
@@ -181,17 +186,14 @@ const Forms = () => {
     [index]
   );
 
-  const handleRadioButton = useCallback(() => {
-    setChecked(!checked);
-  }, [checked]);
-
-  console.log({ form });
+  const date = new Date('01/05/1994');
+  console.log({ date });
 
   return (
     <Container>
       <ProgressForm form={FORM} index={index} />
       <MainContainer>
-        {FORM[index].components.map((component) => {
+        {Schemas.MEDICACAO[index].components.map((component) => {
           if (component.name === 'Input') {
             return (
               <Input
@@ -201,6 +203,7 @@ const Forms = () => {
                 keyRef={component.key}
                 onChangeText={setForm}
                 keyboardType={component?.type}
+                placeholder={component.placeholder}
               />
             );
           }
@@ -214,6 +217,7 @@ const Forms = () => {
                 onChangeText={setForm}
                 mask={component.mask}
                 keyboardType={component?.type}
+                placeholder={component.placeholder}
               />
             );
           }
@@ -223,8 +227,9 @@ const Forms = () => {
                 keyRef={component.key}
                 value={form[component.key]}
                 title={component.title}
-                handlePress={handleRadioButton}
-                checked={checked}
+                onChangeOption={setForm}
+                opt1={component.opt1}
+                opt2={component.opt2}
               />
             );
           }

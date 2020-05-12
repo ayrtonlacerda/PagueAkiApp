@@ -70,7 +70,7 @@ export const Picker = ({
                 <Scroll>
                   {options.map((item) => (
                     <Options onPress={() => handleSelectOptions(item)}>
-                      {selected === item && <CheckIcon />}
+                      {value === item && <CheckIcon />}
                       <TextOptions>{item}</TextOptions>
                     </Options>
                   ))}
