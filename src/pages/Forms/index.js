@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useCommons } from '../../hooks';
 import { MainContainer, ProgressContainer, ButtonContainer } from './styles';
+import { colors } from '../../styles';
 import {
   Input,
   InputMask, // change name
@@ -55,6 +56,12 @@ const FORM = [
         name: 'Picker',
         key: 'Picker',
         title: 'Picker Test',
+        options: [
+          'Aposentado',
+          'Pensionista',
+          'Em plena atividade profissional',
+          'Funcionario publico',
+        ],
       },
       {
         name: 'Radio',
@@ -145,8 +152,6 @@ const Forms = () => {
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
   const [checked, setChecked] = useState(false);
-  const [selected, setSelected] = useState('');
-
   useEffect(() => {
     FORM.map((step) =>
       step.components.map((item) =>
@@ -180,13 +185,7 @@ const Forms = () => {
     setChecked(!checked);
   }, [checked]);
 
-  const handlePicker = useCallback(
-    (value) => {
-      setSelected(value);
-      console.tron.log(selected);
-    },
-    [selected]
-  );
+  console.log({ form });
 
   return (
     <Container>
@@ -221,6 +220,7 @@ const Forms = () => {
           if (component.name === 'Radio') {
             return (
               <RadioButton
+                keyRef={component.key}
                 value={form[component.key]}
                 title={component.title}
                 handlePress={handleRadioButton}
@@ -231,10 +231,11 @@ const Forms = () => {
           if (component.name === 'Picker') {
             return (
               <Picker
+                keyRef={component.key}
                 value={form[component.key]}
+                options={component.options}
                 title={component.title}
-                handlePicker={handlePicker}
-                selected={selected}
+                onChangeOption={setForm}
               />
             );
           }

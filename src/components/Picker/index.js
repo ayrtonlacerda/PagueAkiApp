@@ -1,8 +1,21 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import PickerBox from 'react-native-picker-box';
 import { colors } from '../../styles';
 
-import { ErrorText, Title, PickerView, InstructionText } from './styles';
+import {
+  ErrorText,
+  Title,
+  PickerView,
+  InstructionText,
+  WithOutFeedBack,
+  ModalPicker,
+  ContainerModal,
+  BoxOptions,
+  Scroll,
+  Options,
+  TextOptions,
+  CheckIcon,
+} from './styles';
 
 const data = [
   { label: 'Português', value: 'pt' },
@@ -10,34 +23,63 @@ const data = [
   { label: 'English', value: 'en' },
 ];
 
-export const Picker = ({ title, error, handlePicker, selected }) => {
-  let pickerRef = useRef();
+export const Picker = ({
+  keyRef,
+  title,
+  error,
+  selected,
+  options = [],
+  onChangeOption,
+  value,
+}) => {
+  const [show, setShow] = useState(false);
 
-  const open = () => {
-    if (pickerRef) {
-      pickerRef.openPicker();
-    }
-  };
+  const handleOpenPicker = useCallback(() => {
+    setShow(!show);
+  }, [show]);
+
+  const handleSelectOptions = useCallback(
+    (item) => {
+      onChangeOption((prevState) => ({ ...prevState, [keyRef]: item }));
+      setShow(!show);
+    },
+    [show]
+  );
 
   return (
     <>
       {title && <Title>{title}</Title>}
       {error && <ErrorText>{error}</ErrorText>}
       <PickerView>
-        {selected ? (
-          <InstructionText onPress={open}>{selected}</InstructionText>
+        {value ? (
+          <InstructionText onPress={handleOpenPicker}>{value}</InstructionText>
         ) : (
-            <InstructionText onPress={open}>Selecione uma opção</InstructionText>
-          )}
+          <InstructionText onPress={handleOpenPicker}>
+            Selecione uma opção
+          </InstructionText>
+        )}
+        <ModalPicker
+          animationType="slide"
+          transparent
+          visible={show}
+          onRequestClose={() => {}}
+        >
+          <ContainerModal onPress={handleOpenPicker}>
+            <WithOutFeedBack>
+              <BoxOptions>
+                <Scroll>
+                  {options.map((item) => (
+                    <Options onPress={() => handleSelectOptions(item)}>
+                      {selected === item && <CheckIcon />}
+                      <TextOptions>{item}</TextOptions>
+                    </Options>
+                  ))}
+                </Scroll>
+              </BoxOptions>
+            </WithOutFeedBack>
+          </ContainerModal>
+        </ModalPicker>
       </PickerView>
-      <PickerBox
-        ref={(ref) => (pickerRef = ref)}
-        data={data}
-        onValueChange={handlePicker}
-        prevTextLabel="Cancelar"
-        prevTextColor={colors.PRIMARY}
-        separatorColor={colors.BACKGROUND}
-      />
     </>
   );
 };
