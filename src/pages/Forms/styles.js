@@ -13,6 +13,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const MainContainer = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
   contentContainerStyle: {
     alignItems: 'center',
     paddingTop: metrics.BIG,

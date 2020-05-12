@@ -17,25 +17,19 @@ export const ErrorText = styled.Text`
   align-self: flex-start;
 `;
 
-export const RadioContainer = styled.View`
-  flex-direction: row;
-  width: 100%;
-  height: 35px;
-  margin-bottom: ${metrics.BIG};
-  border-width: 1px;
-  border-color: ${colors.GREY};
-  border-radius: ${metrics.RADIUS};
-`;
-
-export const OptionContainer = styled.View`
-  flex: 1;
+export const PickerView = styled.View`
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: ${({ checked }) =>
-    checked ? colors.BACKGROUND : colors.PRIMARY};
+  margin-bottom: ${metrics.BIG};
+  width: 100%;
 `;
 
-export const OptionText = styled.Text`
+export const InstructionText = styled.Text`
   font-size: 15px;
+  padding: 15px;
+  width: 100%;
+  align-self: center;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: ${colors.GREY};
 `;

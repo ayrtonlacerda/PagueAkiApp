@@ -15,6 +15,7 @@ import {
   Container,
   ButtonTouchable,
   RadioButton,
+  Picker,
 } from '../../components';
 
 /*
@@ -56,6 +57,11 @@ const FORM = [
         title: 'RG',
         mask: '[000000]-[00]',
         type: 'numeric',
+      },
+      {
+        name: 'Picker',
+        key: 'Picker',
+        title: 'Picker Test',
       },
       {
         name: 'Radio',
@@ -146,6 +152,7 @@ const Forms = () => {
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
   const [checked, setChecked] = useState(false);
+  const [selected, setSelected] = useState('');
 
   useEffect(() => {
     FORM.map((step) =>
@@ -180,12 +187,14 @@ const Forms = () => {
     setChecked(!checked);
   }, [checked]);
 
-  /* const handleRadioButton = () => {
-    setChecked(!checked);
-    console.tron.log('entrei aqui', checked);
-  }; */
+  const handlePicker = useCallback(
+    (value) => {
+      setSelected(value);
+      console.tron.log(selected);
+    },
+    [selected]
+  );
 
-  console.log({ form });
   return (
     <Container>
       <ProgressContainer>
@@ -231,6 +240,16 @@ const Forms = () => {
                 title={component.title}
                 handlePress={handleRadioButton}
                 checked={checked}
+              />
+            );
+          }
+          if (component.name === 'Picker') {
+            return (
+              <Picker
+                value={form[component.key]}
+                title={component.title}
+                handlePicker={handlePicker}
+                selected={selected}
               />
             );
           }
