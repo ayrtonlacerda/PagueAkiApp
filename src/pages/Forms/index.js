@@ -14,7 +14,8 @@ import {
   InputMask, // change name
   Container,
   ButtonTouchable,
-  Avatar,
+  RadioButton,
+  Picker,
 } from '../../components';
 
 /*
@@ -56,6 +57,16 @@ const FORM = [
         title: 'RG',
         mask: '[000000]-[00]',
         type: 'numeric',
+      },
+      {
+        name: 'Picker',
+        key: 'Picker',
+        title: 'Picker Test',
+      },
+      {
+        name: 'Radio',
+        key: 'Radio',
+        title: 'Radio Button Test',
       },
     ],
   },
@@ -140,6 +151,8 @@ const Forms = () => {
   const { navigation } = useCommons();
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
+  const [checked, setChecked] = useState(false);
+  const [selected, setSelected] = useState('');
 
   useEffect(() => {
     FORM.map((step) =>
@@ -149,7 +162,7 @@ const Forms = () => {
     );
   }, []);
 
-  const handleFinish = () => {};
+  const handleFinish = () => { };
 
   const handleNextStep = useCallback(() => {
     if (index < FORM.length - 1) setIndex(index + 1);
@@ -170,7 +183,18 @@ const Forms = () => {
     [index]
   );
 
-  console.log({ form });
+  const handleRadioButton = useCallback(() => {
+    setChecked(!checked);
+  }, [checked]);
+
+  const handlePicker = useCallback(
+    (value) => {
+      setSelected(value);
+      console.tron.log(selected);
+    },
+    [selected]
+  );
+
   return (
     <Container>
       <ProgressContainer>
@@ -206,6 +230,26 @@ const Forms = () => {
                 onChangeText={setForm}
                 mask={component.mask}
                 keyboardType={component?.type}
+              />
+            );
+          }
+          if (component.name === 'Radio') {
+            return (
+              <RadioButton
+                value={form[component.key]}
+                title={component.title}
+                handlePress={handleRadioButton}
+                checked={checked}
+              />
+            );
+          }
+          if (component.name === 'Picker') {
+            return (
+              <Picker
+                value={form[component.key]}
+                title={component.title}
+                handlePicker={handlePicker}
+                selected={selected}
               />
             );
           }
