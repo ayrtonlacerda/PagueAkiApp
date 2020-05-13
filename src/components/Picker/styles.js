@@ -24,6 +24,12 @@ export const PickerView = styled.View`
   width: 100%;
 `;
 
+export const InstructionView = styled.View`
+  position: relative;
+  align-self: stretch;
+  justify-content: center;
+`;
+
 export const InstructionText = styled.Text`
   font-size: 15px;
   padding: 15px;
@@ -32,6 +38,17 @@ export const InstructionText = styled.Text`
   border-width: 1px;
   border-radius: 10px;
   border-color: ${colors.GREY};
+  color: ${colors.LIGHT_BLACK};
+`;
+
+export const IconView = styled.TouchableOpacity`
+  position: absolute;
+  align-self: flex-end;
+  justify-content: center;
+  height: 40px;
+  width: 35px;
+  padding: 2px;
+  elevation: 10;
 `;
 
 export const WithOutFeedBack = styled.TouchableWithoutFeedback``;

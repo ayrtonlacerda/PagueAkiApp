@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import ImagePicker from 'react-native-image-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
 import { Button } from '../ButtonRect';
+import { metrics } from '../../styles';
 
 import {
   ErrorText,
@@ -11,33 +13,29 @@ import {
   ChangeButtonText,
 } from './styles';
 
-const cameraOptions = {
-  title: 'Escolha uma das opções',
-  cancelButtonTitle: 'Cancelar',
-  takePhotoButtonTitle: 'Tirar uma foto',
-  chooseFromLibraryButtonTitle: 'Escolher uma foto',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-  mediaType: 'mixed',
-};
-
-export const Camera = ({ keyRef, title, error, onChangeOption }) => {
-  const [image, setImage] = useState(null);
+export const Camera = ({ title, error, crop }) => {
+  const [photo, setPhoto] = useState(null);
 
   const handleCamera = useCallback(() => {
-    ImagePicker.showImagePicker(cameraOptions, (res) => setImage(res));
-  }, [image]);
+    ImageCropPicker.openCamera({
+      width: (metrics.SCREEN_WIDTH - 2 * metrics.XBIG) * 0.9,
+      height: 200,
+      cropping: crop,
+      includeBase64: true,
+      useFrontCamera: true,
+    }).then((image) => {
+      setPhoto(image);
+    });
+  }, [photo]);
 
   return (
     <>
       {title && <Title>{title}</Title>}
       {error && <ErrorText>{error}</ErrorText>}
       <CameraContainer>
-        {image && image.uri ? (
+        {photo && photo.path ? (
           <>
-            <Photo source={image} />
+            <Photo source={{ uri: photo.path }} />
             <ChangeButton onPress={handleCamera}>
               <ChangeButtonText>Tirar outra foto</ChangeButtonText>
             </ChangeButton>

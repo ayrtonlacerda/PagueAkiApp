@@ -152,11 +152,13 @@ export default [
         name: 'Image',
         key: 'doc',
         title: 'Imagem do documento (CNH ou RG)',
+        crop: true,
       },
       {
         name: 'Image',
         key: 'face',
         title: 'Uma foto do seu rosto',
+        crop: false,
       },
     ],
   },

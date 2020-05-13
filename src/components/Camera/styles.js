@@ -25,7 +25,7 @@ export const CameraContainer = styled.View`
 
 export const Photo = styled.Image`
   width: 90%;
-  height: 180px;
+  height: 200px;
   margin: ${metrics.RADIUS}px;
   border-radius: ${metrics.RADIUS};
 `;

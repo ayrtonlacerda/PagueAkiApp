@@ -23,18 +23,19 @@ export const RadioContainer = styled.View`
   margin-bottom: ${metrics.BIG};
   border-width: 1px;
   border-color: ${colors.GREY};
-  border-radius: ${metrics.RADIUS};
+  border-radius: 12px;
 `;
 
 export const OptionContainer = styled.TouchableOpacity`
   flex: 1;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: ${metrics.RADIUS};
   background: ${({ checked }) =>
     checked ? colors.BACKGROUND : colors.PRIMARY};
 `;
 
 export const OptionText = styled.Text`
   font-size: 15px;
+  color: ${({ checked }) => (checked ? colors.WHITE : colors.PRIMARY)};
 `;
