@@ -7,8 +7,7 @@ export const CardContainer = styled.View`
   height: 180px;
   width: 100%;
   background: ${({ cardColor }) => cardColor || colors.PRIMARY};
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: ${metrics.MEDIUM}px;
   border-radius: 20px;
 `;
 
