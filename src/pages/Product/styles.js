@@ -35,7 +35,7 @@ export const ProductTitle = styled.Text`
 export const ProductTextView = styled.View`
   flex-direction: row;
   width: ${metrics.SCREEN_WIDTH * 0.8}px;
-  margin: ${metrics.MEDIUM}px 0px ${metrics.MEDIUM}px 0px;
+  margin: ${metrics.SMALL}px 0px ${metrics.SMALL}px 0px;
 `;
 export const Point = styled.View`
   background: ${colors.WHITE};
