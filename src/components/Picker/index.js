@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-import PickerBox from 'react-native-picker-box';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../../styles';
 
 import {
@@ -15,13 +15,9 @@ import {
   Options,
   TextOptions,
   CheckIcon,
+  InstructionView,
+  IconView,
 } from './styles';
-
-const data = [
-  { label: 'Português', value: 'pt' },
-  { label: 'Deutsch', value: 'de' },
-  { label: 'English', value: 'en' },
-];
 
 export const Picker = ({
   keyRef,
@@ -54,15 +50,22 @@ export const Picker = ({
         {value ? (
           <InstructionText onPress={handleOpenPicker}>{value}</InstructionText>
         ) : (
-          <InstructionText onPress={handleOpenPicker}>
-            Selecione uma opção
-          </InstructionText>
-        )}
+            <>
+              <InstructionView>
+                <InstructionText onPress={handleOpenPicker}>
+                  Selecione uma opção
+              </InstructionText>
+                <IconView onPress={handleOpenPicker}>
+                  <Icon name="expand-more" size={20} color={colors.PRIMARY} />
+                </IconView>
+              </InstructionView>
+            </>
+          )}
         <ModalPicker
           animationType="slide"
           transparent
           visible={show}
-          onRequestClose={() => {}}
+          onRequestClose={() => { }}
         >
           <ContainerModal onPress={handleOpenPicker}>
             <WithOutFeedBack>

@@ -6,13 +6,13 @@ export default [
         name: 'Input',
         key: 'name',
         title: 'Nome',
-        placeholder: 'nome que estar no seu documento',
+        placeholder: 'Nome como no documento',
       },
       {
         name: 'Input',
         key: 'last_name',
         title: 'Sobrenome',
-        placeholder: 'sobrenome que estar no seu documento',
+        placeholder: 'Sobrenome como no documento',
       },
       {
         name: 'Input',
@@ -98,7 +98,7 @@ export default [
         name: 'Input',
         key: 'city',
         title: 'Cidade',
-        placeholder: 'São jose dos campos',
+        placeholder: 'São Jose dos Campos',
       },
       {
         name: 'Input',
@@ -109,8 +109,8 @@ export default [
       {
         name: 'Input',
         key: 'street',
-        title: 'bairro',
-        placeholder: 'São joão',
+        title: 'Bairro',
+        placeholder: 'São João',
       },
       {
         name: 'Input',
@@ -152,11 +152,13 @@ export default [
         name: 'Image',
         key: 'doc',
         title: 'Imagem do documento (CNH ou RG)',
+        crop: true,
       },
       {
         name: 'Image',
         key: 'face',
         title: 'Uma foto do seu rosto',
+        crop: false,
       },
     ],
   },

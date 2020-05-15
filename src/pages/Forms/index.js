@@ -9,15 +9,12 @@ import {
   ButtonTouchable,
   RadioButton,
   Picker,
+  Camera,
 } from '../../components';
 
 import ProgressForm from './components/ProgressForm';
 
 import { Schemas } from '../../util';
-/*
-  map step
-    map componentes
-*/
 
 const FORM = [
   {
@@ -158,22 +155,22 @@ const Forms = () => {
 
   // constroi campos com chaves
   useEffect(() => {
-    FORM.map((step) =>
+    Schemas.MEDICACAO.map((step) =>
       step.components.map((item) =>
         setForm((prevState) => ({ ...prevState, [item.key]: null }))
       )
     );
   }, []);
 
-  const handleFinish = () => {};
+  const handleFinish = () => { };
 
   const handleNextStep = useCallback(() => {
-    if (index < FORM.length - 1) setIndex(index + 1);
+    if (index < Schemas.MEDICACAO.length - 1) setIndex(index + 1);
     else handleFinish();
   }, [index]);
 
   const handlePreviousStep = useCallback(() => {
-    if (index > 0 && index < FORM.length) setIndex(index - 1);
+    if (index > 0 && index < Schemas.MEDICACAO.length) setIndex(index - 1);
     else navigation.navigate('Home');
   }, [index, navigation]);
 
@@ -182,7 +179,7 @@ const Forms = () => {
   ]);
 
   const textButton = useMemo(
-    () => (index < FORM.length - 1 ? 'PRÓXIMO' : 'FINALIZAR'),
+    () => (index < Schemas.MEDICACAO.length - 1 ? 'PRÓXIMO' : 'FINALIZAR'),
     [index]
   );
 
@@ -191,7 +188,7 @@ const Forms = () => {
 
   return (
     <Container>
-      <ProgressForm form={FORM} index={index} />
+      <ProgressForm form={Schemas.MEDICACAO} index={index} />
       <MainContainer>
         {Schemas.MEDICACAO[index].components.map((component) => {
           if (component.name === 'Input') {
@@ -241,6 +238,16 @@ const Forms = () => {
                 options={component.options}
                 title={component.title}
                 onChangeOption={setForm}
+              />
+            );
+          }
+          if (component.name === 'Image') {
+            return (
+              <Camera
+                keyRef={component.key}
+                value={form[component.key]}
+                title={component.title}
+                crop={component.crop}
               />
             );
           }

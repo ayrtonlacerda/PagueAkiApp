@@ -7,8 +7,7 @@ export const CardContainer = styled.View`
   height: 180px;
   width: 100%;
   background: ${({ cardColor }) => cardColor || colors.PRIMARY};
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: ${metrics.MEDIUM}px;
   border-radius: 20px;
 `;
 
@@ -23,13 +22,17 @@ export const CardTitleText = styled.Text`
   color: #fff;
   font-weight: bold;
   font-size: 21px;
-  width: 218px;
+  flex: 1;
 `;
 
-export const CardImage = styled.Image`
-  width: 65px;
-  height: 65px;
-  border-radius: 10px;
+export const CardImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: 130px;
+  max-height: 70px;
+  border-radius: ${metrics.RADIUS / 2};
+  align-content: flex-end;
+  justify-content: flex-end;
 `;
 
 export const CardBottomView = styled.View`

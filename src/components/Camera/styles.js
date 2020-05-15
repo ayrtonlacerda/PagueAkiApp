@@ -16,26 +16,25 @@ export const ErrorText = styled.Text`
   align-self: flex-start;
 `;
 
-export const RadioContainer = styled.View`
-  flex-direction: row;
-  width: 100%;
-  height: 35px;
-  margin-bottom: ${metrics.BIG};
-  border-width: 1px;
-  border-color: ${colors.GREY};
-  border-radius: 12px;
-`;
-
-export const OptionContainer = styled.TouchableOpacity`
+export const CameraContainer = styled.View`
   flex: 1;
+  width: 100%;
+  margin-bottom: ${metrics.BIG};
   align-items: center;
-  justify-content: center;
-  border-radius: ${metrics.RADIUS};
-  background: ${({ checked }) =>
-    checked ? colors.BACKGROUND : colors.PRIMARY};
 `;
 
-export const OptionText = styled.Text`
+export const Photo = styled.Image`
+  width: 90%;
+  height: 200px;
+  margin: ${metrics.RADIUS}px;
+  border-radius: ${metrics.RADIUS};
+`;
+
+export const ChangeButton = styled.TouchableOpacity``;
+
+export const ChangeButtonText = styled.Text`
+  color: ${colors.PRIMARY};
+  font-weight: bold;
   font-size: 15px;
-  color: ${({ checked }) => (checked ? colors.WHITE : colors.PRIMARY)};
+  text-decoration-line: underline;
 `;
