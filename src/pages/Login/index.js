@@ -28,7 +28,6 @@ const Login = () => {
     password: '',
   });
 
-  navigation.navigate('Home');
   useEffect(() => {
     if (!err) {
       fetchAuth(forms, 'postSignIn');

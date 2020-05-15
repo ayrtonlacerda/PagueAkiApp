@@ -15,137 +15,6 @@ import {
 import ProgressForm from './components/ProgressForm';
 
 import { Schemas } from '../../util';
-
-const FORM = [
-  {
-    name: 'Informações Pessoais',
-    components: [
-      {
-        name: 'Input',
-        key: 'name',
-        title: 'Nome',
-      },
-      {
-        name: 'Input',
-        key: 'lastName',
-        title: 'Sobrenome',
-      },
-      {
-        name: 'InputMask',
-        key: 'birthday',
-        title: 'Data de Nascimento',
-        mask: '[00]/[00]/[0000]',
-        type: 'numeric',
-      },
-      {
-        name: 'InputMask',
-        key: 'cpf',
-        title: 'CPF',
-        mask: '[000].[000].[000]-[00]',
-        type: 'numeric',
-      },
-      {
-        name: 'InputMask',
-        key: 'rg',
-        title: 'RG',
-        mask: '[000000]-[00]',
-        type: 'numeric',
-      },
-      {
-        name: 'Picker',
-        key: 'Picker',
-        title: 'Picker Test',
-        options: [
-          'Aposentado',
-          'Pensionista',
-          'Em plena atividade profissional',
-          'Funcionario publico',
-        ],
-      },
-      {
-        name: 'Radio',
-        key: 'Radio',
-        title: 'Radio Button Test',
-      },
-    ],
-  },
-  {
-    name: 'Informações Pessoais',
-    components: [
-      {
-        name: 'Input',
-        key: 'civilState',
-        title: 'Estado Civil',
-      },
-      {
-        name: 'Input',
-        key: 'genere',
-        title: 'Gênero',
-      },
-      {
-        name: 'Input',
-        key: 'childrens',
-        title: 'Filhos',
-        type: 'numeric',
-      },
-    ],
-  },
-  {
-    name: 'Endereço',
-    components: [
-      {
-        name: 'Input',
-        key: 'city',
-        title: 'Cidade',
-      },
-      {
-        name: 'Input',
-        key: 'state',
-        title: 'Estado',
-      },
-      {
-        name: 'Input',
-        key: 'street',
-        title: 'bairro',
-      },
-      {
-        name: 'Input',
-        key: 'number',
-        title: 'Numero',
-        type: 'numeric',
-      },
-      {
-        name: 'InputMask',
-        key: 'cep',
-        title: 'CEP',
-        mask: '[00000]-[000]',
-        type: 'numeric',
-      },
-    ],
-  },
-  {
-    name: 'Informações pagamento',
-    components: [
-      {
-        name: 'Input',
-        key: 'bank',
-        title: 'Banco',
-      },
-      {
-        name: 'Input',
-        key: 'agc',
-        title: 'Agencia',
-        type: 'numeric',
-      },
-      {
-        name: 'Input',
-        key: 'count',
-        title: 'Conta',
-      },
-    ],
-  },
-];
-
 // lidar com o inputmask
 
 const Forms = () => {
@@ -162,7 +31,7 @@ const Forms = () => {
     );
   }, []);
 
-  const handleFinish = () => { };
+  const handleFinish = useCallback(() => navigation.navigate('Finish'), []);
 
   const handleNextStep = useCallback(() => {
     if (index < Schemas.MEDICACAO.length - 1) setIndex(index + 1);
