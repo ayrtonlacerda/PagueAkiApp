@@ -12,6 +12,7 @@ import Home from '../pages/Home';
 import Perfil from '../pages/Perfil';
 import Product from '../pages/Product';
 import { Forms } from '../pages';
+import Finish from '../pages/Finish';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,6 +63,7 @@ export default function Routes() {
         <Stack.Screen name="Home" component={TabsScreen} />
         <Stack.Screen name="Product" component={Product} />
         <Stack.Screen name="Forms" component={Forms} />
+        <Stack.Screen name="Finish" component={Finish} />
       </Stack.Navigator>
     </NavigationContainer>
   );
