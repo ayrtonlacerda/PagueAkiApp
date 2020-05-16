@@ -61,10 +61,12 @@ export const ServiceCard = styled.View`
   background: ${({ cardColor }) => cardColor || colors.PRIMARY};
 `;
 
-export const ServiceCardImage = styled.Image`
-  width: 60px;
-  height: 55px;
-  border-radius: 10px;
+export const ServiceCardImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: 115px;
+  height: 75px;
+  border-radius: ${metrics.RADIUS / 3}px;
   margin-right: 8px;
 `;
 

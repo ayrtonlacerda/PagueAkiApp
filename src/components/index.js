@@ -9,3 +9,4 @@ export * from './RadioButton';
 export * from './Picker';
 export * from './InputMask';
 export * from './Camera';
+export * from './TitleNText';
