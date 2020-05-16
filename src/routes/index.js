@@ -14,6 +14,7 @@ import Product from '../pages/Product';
 import { Forms } from '../pages';
 import Finish from '../pages/Finish';
 import ShowData from '../pages/ShowData';
+import Confirm from '../pages/Confirm';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -66,6 +67,7 @@ export default function Routes() {
         <Stack.Screen name="Forms" component={Forms} />
         <Stack.Screen name="Finish" component={Finish} />
         <Stack.Screen name="ShowData" component={ShowData} />
+        <Stack.Screen name="Confirm" component={Confirm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

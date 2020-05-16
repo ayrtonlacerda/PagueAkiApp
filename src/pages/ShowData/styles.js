@@ -3,6 +3,7 @@ import { metrics } from '../../styles';
 
 export const IconView = styled.TouchableOpacity`
   align-self: flex-start;
+  margin-bottom: ${-metrics.MEDIUM}px;
 `;
 
 export const ProductImage = styled.Image.attrs({
@@ -39,12 +40,6 @@ export const InfosView = styled.ScrollView.attrs({
 })`
   width: 100%;
 `;
-
-/* export const InfosView = styled.View`
-  justify-content: flex-start;
-  width: 100%;
-  flex: 1;
-`; */
 
 export const InstructionText = styled.Text`
   font-size: 17px;

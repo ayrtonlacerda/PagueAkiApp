@@ -23,6 +23,10 @@ export default function ShowData() {
     navigation.navigate('Perfil');
   };
 
+  const handleNextStep = () => {
+    navigation.navigate('Confirm', { product });
+  };
+
   return (
     <Container>
       <IconView onPress={handleBackPress}>
@@ -59,14 +63,24 @@ export default function ShowData() {
           <InstructionText>
             Clique no botão para enviar o termo assinado
           </InstructionText>
-          <Button text="Enviar" margin={metrics.BIG} color={colors.ORANGE} />
+          <Button
+            text="Próxima etapa"
+            margin={metrics.BIG}
+            color={colors.ORANGE}
+            handleOnPress={handleNextStep}
+          />
         </>
       ) : null}
       {product.status === 'Active' ? (
-        <Button text="Cancelar" margin={metrics.BIG} color={colors.RED} />
+        <Button
+          text="Cancelar"
+          margin={metrics.BIG}
+          color={colors.RED}
+          onPress={() => { }}
+        />
       ) : null}
       {product.status === 'Canceled' ? (
-        <Button text="Reativar" margin={metrics.BIG} />
+        <Button text="Reativar" margin={metrics.BIG} onPress={() => { }} />
       ) : null}
     </Container>
   );
