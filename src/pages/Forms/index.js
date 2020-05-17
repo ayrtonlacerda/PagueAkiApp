@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { useCommons } from '../../hooks';
-import { MainContainer, ProgressContainer, ButtonContainer } from './styles';
-import { colors } from '../../styles';
+import { useCommons, useLazyFetch, useValidation } from '../../hooks';
+import Endpoints from '../../services';
+// ui
+import { MainContainer, ButtonContainer } from './styles';
 import {
   Input,
   InputMask, // change name
@@ -18,51 +19,96 @@ import { Schemas } from '../../util';
 // lidar com o inputmask
 
 const Forms = () => {
-  const { navigation } = useCommons();
+  const { navigation, route } = useCommons();
+  const { typeForm } = route.params; // tipo do form pra busca o schema
+
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
+  const [err, setErr] = useState(null);
+
+  const [sendForm, { response, loading, error }] = useLazyFetch(
+    Endpoints.postFormDrugstore,
+    form
+  );
+  // console.log({ response, loading, error });
 
   // constroi campos com chaves
   useEffect(() => {
-    Schemas.MEDICACAO.map((step) =>
+    Schemas[typeForm].map((step) =>
       step.components.map((item) =>
         setForm((prevState) => ({ ...prevState, [item.key]: null }))
       )
     );
+  }, [typeForm]);
+
+  // so quando processa o form
+  const handleFinish = useCallback(() => {
+    // so pode finalizar quando preencher todos os campos menos os com dependencia
+    // mas se os de dependencia aparecer tem que preencher
+    // validar preenchimento obrigatorio, email, qtade minima..
+    // onde tem mascara envia strig or value?
+    navigation.navigate('Finish');
   }, []);
 
-  const handleFinish = useCallback(() => navigation.navigate('Finish'), []);
-
   const handleNextStep = useCallback(() => {
-    if (index < Schemas.MEDICACAO.length - 1) setIndex(index + 1);
-    else handleFinish();
-  }, [index]);
+    let error = {};
+    const keyFromStep = Schemas[typeForm][index].components.filter(
+      (item) => item.key
+    );
+
+    keyFromStep.map((item) =>
+      Object.keys(form).map((key) => {
+        if (
+          (item.key === key && form[key] === null && !item.dependency) ||
+          (item.key === key &&
+            form[key] === null &&
+            item.dependency &&
+            item.conditional === form[item.dependency])
+        ) {
+          error = {
+            ...error,
+            [key]: 'Esse campo é obrigatorio',
+          };
+        }
+      })
+    );
+    setErr(error);
+    if (Object.keys(error).length === 0) {
+      if (index < Schemas[typeForm].length - 1) {
+        setIndex(index + 1);
+      } else handleFinish();
+    }
+  }, [index, typeForm, form]);
 
   const handlePreviousStep = useCallback(() => {
-    if (index > 0 && index < Schemas.MEDICACAO.length) setIndex(index - 1);
+    if (index > 0 && index < Schemas[typeForm].length) setIndex(index - 1);
     else navigation.navigate('Home');
-  }, [index, navigation]);
+  }, [index, navigation, typeForm]);
 
   const textOutlineButton = useMemo(() => (index === 0 ? 'HOME' : 'VOLTAR'), [
     index,
   ]);
 
   const textButton = useMemo(
-    () => (index < Schemas.MEDICACAO.length - 1 ? 'PRÓXIMO' : 'FINALIZAR'),
-    [index]
+    () => (index < Schemas[typeForm].length - 1 ? 'PRÓXIMO' : 'FINALIZAR'),
+    [index, typeForm]
   );
 
-  const date = new Date('01/05/1994');
-  console.log({ date });
-
+  // asdasconsole.log({ form });
   return (
     <Container>
-      <ProgressForm form={Schemas.MEDICACAO} index={index} />
+      <ProgressForm form={Schemas[typeForm]} index={index} />
       <MainContainer>
-        {Schemas.MEDICACAO[index].components.map((component) => {
-          if (component.name === 'Input') {
+        {Schemas[typeForm][index].components.map((component) => {
+          // gera uma depencia de preenchimento
+          if (
+            (component.name === 'Input' && !component.dependency) ||
+            (component.dependency &&
+              component.conditional === form[component.dependency])
+          ) {
             return (
               <Input
+                error={err?.[component.key]}
                 value={form[component.key]}
                 outline
                 title={component.title}
@@ -76,6 +122,7 @@ const Forms = () => {
           if (component.name === 'InputMask') {
             return (
               <InputMask
+                error={err?.[component.key]}
                 value={form[component.key]}
                 outline
                 title={component.title}
@@ -90,6 +137,7 @@ const Forms = () => {
           if (component.name === 'Radio') {
             return (
               <RadioButton
+                error={err?.[component.key]}
                 keyRef={component.key}
                 value={form[component.key]}
                 title={component.title}
@@ -102,6 +150,7 @@ const Forms = () => {
           if (component.name === 'Picker') {
             return (
               <Picker
+                error={err?.[component.key]}
                 keyRef={component.key}
                 value={form[component.key]}
                 options={component.options}
@@ -113,6 +162,7 @@ const Forms = () => {
           if (component.name === 'Image') {
             return (
               <Camera
+                error={err?.[component.key]}
                 keyRef={component.key}
                 value={form[component.key]}
                 title={component.title}

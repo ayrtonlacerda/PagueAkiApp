@@ -6,6 +6,9 @@ const Endpoints = {
     return api.post('/sessions', data);
   },
   postSignUp: (data) => api.post('/users', data),
+
+  // form
+  postFormDrugstore: (body) => api.post('/drugstore', body),
 };
 
 export { api };

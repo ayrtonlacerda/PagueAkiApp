@@ -56,12 +56,13 @@ export const WithOutFeedBack = styled.TouchableWithoutFeedback``;
 //
 export const ModalPicker = styled.Modal``;
 
-export const ContainerModal = styled.TouchableOpacity`
+export const ContainerModal = styled.TouchableOpacity.attrs({
+  activeOpacity: 1,
+})`
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: flex-end;
-  background-color: #00000022;
 `;
 
 export const BoxOptions = styled.View`
@@ -71,10 +72,16 @@ export const BoxOptions = styled.View`
   align-items: center;
   justify-content: flex-end;
   background-color: ${colors.WHITE};
-  border-top-left-radius: ${metrics.RADIUS};
-  border-top-right-radius: ${metrics.RADIUS};
+  border-top-width: 0.3px;
+  border-top-color: ${colors.LIGHT_BLACK};
+  border-top-left-radius: ${metrics.RADIUS * 2};
+  border-top-right-radius: ${metrics.RADIUS * 2};
   padding-bottom: ${metrics.BIG};
   padding-top: ${metrics.MEDIUM};
+  elevation: 5;
+  shadow-offset: {  width: 10,  height: 10,  };
+  shadow-color: ${colors.LIGHT_BLACK};
+  shadow-opacity: 0.6;
 `;
 
 export const Scroll = styled.ScrollView.attrs({

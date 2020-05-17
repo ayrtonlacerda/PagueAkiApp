@@ -17,7 +17,10 @@ export default function Product() {
 
   const { product } = route.params;
 
-  const handleConfirm = useCallback(() => navigation.navigate('Forms'), []);
+  const handleConfirm = useCallback(
+    () => navigation.navigate('Forms', { typeForm: product.value }),
+    []
+  );
 
   return (
     <Container background={product.color}>

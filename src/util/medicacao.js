@@ -1,3 +1,5 @@
+import * as yup from 'yup';
+
 export default [
   {
     name: 'Dados Pessoal 1',
@@ -7,12 +9,14 @@ export default [
         key: 'name',
         title: 'Nome',
         placeholder: 'Nome como no documento',
+        validator: yup.string().required(),
       },
       {
         name: 'Input',
         key: 'last_name',
         title: 'Sobrenome',
         placeholder: 'Sobrenome como no documento',
+        validator: yup.string().required(),
       },
       {
         name: 'Input',
@@ -38,7 +42,7 @@ export default [
       },
       {
         name: 'InputMask',
-        key: 'birthday',
+        key: 'birth_date',
         title: 'Data de Nascimento',
         placeholder: '00/00/0000',
         mask: '[00]/[00]/[0000]',
@@ -57,8 +61,8 @@ export default [
       },
       {
         name: 'Radio',
-        key: 'sexo',
-        title: 'Sexo',
+        key: 'genre',
+        title: 'Genero',
         opt1: 'Masculino',
         opt2: 'Feminino',
       },
@@ -80,7 +84,7 @@ export default [
       },
       {
         name: 'Picker',
-        key: 'situation',
+        key: 'professional_situation',
         title: 'Situação',
         options: [
           'Aposentado',
@@ -88,6 +92,15 @@ export default [
           'Em plena atividade profissional',
           'Funcionario publico',
         ],
+      },
+      {
+        name: 'Input',
+        key: 'public_agency',
+        title: 'Angência publica',
+        placeholder: 'FUB',
+        conditional: 'Funcionario publico',
+        dependency: 'professional_situation',
+        validator: yup.string().required(),
       },
     ],
   },
@@ -102,19 +115,19 @@ export default [
       },
       {
         name: 'Input',
-        key: 'state',
+        key: 'uf',
         title: 'Estado',
         placeholder: 'São Paulo',
       },
       {
         name: 'Input',
-        key: 'street',
+        key: 'neighborhood',
         title: 'Bairro',
         placeholder: 'São João',
       },
       {
         name: 'Input',
-        key: 'number',
+        key: 'address_number',
         title: 'Numero',
         type: 'numeric',
         placeholder: '000',
@@ -172,33 +185,65 @@ export default [
         options: [
           'cartão de credito',
           'debito em conta corrente',
-          ' boleto bancario',
+          'boleto bancario',
           'desconto em folha de pagamento',
         ],
       },
       {
         name: 'Input',
-        key: 'bank',
+        key: 'bank_name',
         title: 'Banco',
         placeholder: 'Caixa Economica',
+        conditional: 'debito em conta corrente',
+        dependency: 'option_payment',
       },
       {
         name: 'Input',
-        key: 'agc',
+        key: 'bank_agency',
         title: 'Agência',
         type: 'numeric',
         placeholder: '0000000',
+        conditional: 'debito em conta corrente',
+        dependency: 'option_payment',
       },
       {
-        name: 'InputMask',
-        key: 'account',
+        name: 'Input',
+        key: 'bank_account_number',
         title: 'Conta',
         type: 'numeric',
         placeholder: '0000000',
+        conditional: 'debito em conta corrente',
+        dependency: 'option_payment',
       },
     ],
   },
 ];
+
+export const validationSchema = {
+  name: yup.string().required(),
+  last_name: yup.string().required(),
+  email: yup.string().required().email(),
+  phone1: yup.string().required().min(10), // number?
+  phone2: yup.string().min(10), // number?
+  birth_date: yup.string().required(), // date?
+  civil_state: yup.string().required(),
+  genre: yup.string().required(),
+  hight: yup.string().required().min(3), // number?,
+  weight: yup.string().required().min(3), // number?,
+  professional_situation: yup.string().required(),
+  public_agency: yup.string(),
+  city: yup.string().required(),
+  uf: yup.string().required(),
+  neighborhood: yup.string().required(),
+  address_number: yup.number().required(),
+  cep: yup.string().required().min(8), // number?
+  cpf: yup.string().required().min(11),
+  rg: yup.string().required().min(5),
+  option_payment: yup.string().required(),
+  bank_name: yup.string().required(),
+  bank_agency: yup.number().required(),
+  bank_account_number: yup.number().required(),
+};
 /*
 pessoal
   nome

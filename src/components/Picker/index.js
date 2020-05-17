@@ -50,22 +50,22 @@ export const Picker = ({
         {value ? (
           <InstructionText onPress={handleOpenPicker}>{value}</InstructionText>
         ) : (
-            <>
-              <InstructionView>
-                <InstructionText onPress={handleOpenPicker}>
-                  Selecione uma opção
+          <>
+            <InstructionView>
+              <InstructionText onPress={handleOpenPicker}>
+                Selecione uma opção
               </InstructionText>
-                <IconView onPress={handleOpenPicker}>
-                  <Icon name="expand-more" size={20} color={colors.PRIMARY} />
-                </IconView>
-              </InstructionView>
-            </>
-          )}
+              <IconView onPress={handleOpenPicker}>
+                <Icon name="expand-more" size={20} color={colors.PRIMARY} />
+              </IconView>
+            </InstructionView>
+          </>
+        )}
         <ModalPicker
           animationType="slide"
           transparent
           visible={show}
-          onRequestClose={() => { }}
+          onRequestClose={() => {}}
         >
           <ContainerModal onPress={handleOpenPicker}>
             <WithOutFeedBack>

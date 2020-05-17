@@ -57,7 +57,7 @@ const TabsScreen = () => (
 export default function Routes() {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator headerMode="none" initialRouteName="Forms">
+      <Stack.Navigator headerMode="none" initialRouteName="Home">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Home" component={TabsScreen} />
