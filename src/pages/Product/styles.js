@@ -50,3 +50,19 @@ export const ProductText = styled.Text`
   flex: 1;
   text-align: justify;
 `;
+
+export const ViewBall = styled.View`
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+export const Ball = styled.View`
+  width: 10px;
+  height: 10px;
+  border-radius: ${metrics.RADIUS / 3};
+  background-color: ${({ filled }) =>
+    filled ? colors.BLUE : colors.BACKGROUND};
+  margin: 0 ${metrics.MEDIUM}px ${metrics.MEDIUM * 2}px ${metrics.MEDIUM}px;
+`;
