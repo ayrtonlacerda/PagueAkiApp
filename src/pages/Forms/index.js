@@ -18,6 +18,10 @@ import ProgressForm from './components/ProgressForm';
 import { Schemas } from '../../util';
 // lidar com o inputmask
 
+const ENDPOINTS_SEND = {
+  MEDICACAO: Endpoints.postFormDrugstore,
+};
+
 const Forms = () => {
   const { navigation, route } = useCommons();
   const { typeForm } = route.params; // tipo do form pra busca o schema
@@ -27,10 +31,10 @@ const Forms = () => {
   const [err, setErr] = useState(null);
 
   const [sendForm, { response, loading, error }] = useLazyFetch(
-    Endpoints.postFormDrugstore,
+    ENDPOINTS_SEND[typeForm],
     form
   );
-  // console.log({ response, loading, error });
+  console.log({ response, loading, error });
 
   // constroi campos com chaves
   useEffect(() => {
@@ -47,7 +51,9 @@ const Forms = () => {
     // mas se os de dependencia aparecer tem que preencher
     // validar preenchimento obrigatorio, email, qtade minima..
     // onde tem mascara envia strig or value?
-    navigation.navigate('Finish');
+    console.log({ form });
+    sendForm();
+    // navigation.navigate('Finish');
   }, []);
 
   const handleNextStep = useCallback(() => {
@@ -73,7 +79,7 @@ const Forms = () => {
       })
     );
     setErr(error);
-    if (Object.keys(error).length === 0) {
+    if (true) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();

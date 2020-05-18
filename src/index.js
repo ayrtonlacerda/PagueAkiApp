@@ -13,6 +13,7 @@ function App() {
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <Routes />
     </>
   );
 }
