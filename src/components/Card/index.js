@@ -34,8 +34,10 @@ export const Card = ({
       </CardContainer>
     </TouchableWithoutFeedback>
   ) : (
-      <ServiceCard cardColor={cardColor}>
-        <ServiceCardText>{cardText}</ServiceCardText>
-        <ServiceCardImage source={source} />
-      </ServiceCard>
+      <TouchableWithoutFeedback onPress={handleOnPress}>
+        <ServiceCard cardColor={cardColor} onPress={handleOnPress}>
+          <ServiceCardText>{cardText}</ServiceCardText>
+          <ServiceCardImage source={source} />
+        </ServiceCard>
+      </TouchableWithoutFeedback>
     );

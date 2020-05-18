@@ -5,6 +5,7 @@ import LOGO_CAMINHAO from './images/caminhao.png';
 import LOGO_CAMINHAO2 from './images/caminhao2.png';
 import CHECK from './images/ui.png';
 import ALERT from './images/signs.png';
+import CLOSE from './images/close.png';
 
 export const Imgs = {
   LOGO_BRANCA,
@@ -14,4 +15,5 @@ export const Imgs = {
   LOGO_CAMINHAO2,
   CHECK,
   ALERT,
+  CLOSE,
 };

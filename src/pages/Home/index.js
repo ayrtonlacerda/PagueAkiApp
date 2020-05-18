@@ -104,7 +104,7 @@ const ProductList = [
     color: '#77A93A',
     infos: [
       [
-        'A Casa do caralho é uma empresa distribuidora de maquinas POS (ponto de venda ou ponto de serviço, do inglês: Point of Sale ou Point of Service). Atua como facilitador para cotização de contas. Pretendendo explorar segmentos diferenciados, possibilita serviços de pagamentos através do cartão de crédito.',
+        'A XXX uma empresa distribuidora de maquinas POS (ponto de venda ou ponto de serviço, do inglês: Point of Sale ou Point of Service). Atua como facilitador para cotização de contas. Pretendendo explorar segmentos diferenciados, possibilita serviços de pagamentos através do cartão de crédito.',
         'As máquinas de POS possibilitam pagamentos de contas margeadas pelo limite disponibilizado no próprio cartão. Pode-se pagar qualquer tipo de boleto desde que se tenha um código de barras: água, luz, telefone, condomínio, escola, impostos e até mesmo outros cartões de crédito, entre outras utilidades.',
         'É possível realizar quantas operações de pagamento que se fizerem necessárias, tudo dependerá do limite do seu cartão de crédito. ',
         'Faça aqui seu cadastro para a aquisição de sua “maquininha de POS”. Entraremos em contato em até 24 horas.',

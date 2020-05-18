@@ -10,4 +10,5 @@ export const colors = {
   RED: '#CD0000',
   ORANGE: '#CD9400',
   LIGHT_BLACK: 'rgba(0, 0, 0, 0.55)',
+  BLACK: '#000',
 };

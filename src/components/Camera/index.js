@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import ImagePicker from 'react-native-image-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { Button } from '../ButtonRect';
 import { metrics } from '../../styles';
 
 import {
   ErrorText,
+  Hint,
   Title,
   CameraContainer,
   Photo,
@@ -13,7 +13,7 @@ import {
   ChangeButtonText,
 } from './styles';
 
-export const Camera = ({ title, error, crop }) => {
+export const Camera = ({ title, error, crop, hint, noForm }) => {
   const [photo, setPhoto] = useState(null);
 
   const handleCamera = useCallback(() => {
@@ -30,7 +30,8 @@ export const Camera = ({ title, error, crop }) => {
 
   return (
     <>
-      {title && <Title>{title}</Title>}
+      {title && <Title noForm={noForm}>{title}</Title>}
+      {hint && <Hint>{hint}</Hint>}
       {error && <ErrorText>{error}</ErrorText>}
       <CameraContainer>
         {photo && photo.path ? (

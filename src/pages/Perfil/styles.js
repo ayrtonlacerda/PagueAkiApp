@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../../styles';
+import { colors, metrics } from '../../styles';
 
 export const Logout = styled.TouchableOpacity`
   align-self: flex-end;
@@ -58,6 +58,7 @@ export const Avatar = styled.Image`
 `;
 
 export const InfosView = styled.View`
+  flex: 1;
   width: 100%;
 `;
 
@@ -71,8 +72,6 @@ export const UserText = styled.Text`
   color: #000;
   font-size: 15px;
 `;
-
-export const UserPhoneText = styled.Text``;
 
 export const Line = styled.View`
   height: 1px;
@@ -92,8 +91,11 @@ export const ServicesText = styled.Text`
 export const Scroll = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
-})``;
+})`
+  width: 100%;
+`;
+
+export const ViewTeste = styled.View``;
