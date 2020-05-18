@@ -79,7 +79,7 @@ const Forms = () => {
       })
     );
     setErr(error);
-    if (error) {
+    if (Object.keys(error).length === 0) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();
