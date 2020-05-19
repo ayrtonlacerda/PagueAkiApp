@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "build": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "android": "react-native run-android",
     "release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "ios": "react-native run-ios",

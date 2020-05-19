@@ -80,7 +80,6 @@ const NotAuthenticate = () => (
 export default function Routes() {
   const teste = useAuth();
   const { data } = useAuth();
-  console.tron.log(teste);
   return (
     <NavigationContainer ref={navigationRef}>
       {data ? <Authenticate /> : <NotAuthenticate />}

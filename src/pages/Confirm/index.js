@@ -9,9 +9,6 @@ import { metrics, colors } from '../../styles';
 export default function Confirm() {
   const { route, navigation } = useCommons();
   const { product } = route.params;
-
-  console.tron.log(product);
-
   const handleBackPress = () => {
     navigation.navigate('ShowData');
   };
@@ -44,7 +41,7 @@ export default function Confirm() {
       <Button
         text="Enviar"
         margin={metrics.XXBIG}
-        onPress={() => { }}
+        onPress={() => {}}
         color={colors.ORANGE}
       />
     </Container>

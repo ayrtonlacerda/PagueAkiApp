@@ -11,6 +11,7 @@ import {
   RadioButton,
   Picker,
   Camera,
+  MiniForm,
 } from '../../components';
 
 import ProgressForm from './components/ProgressForm';
@@ -24,8 +25,8 @@ const ENDPOINTS_SEND = {
 
 const Forms = () => {
   const { navigation, route } = useCommons();
-  const { typeForm } = route.params; // tipo do form pra busca o schema
-
+  // const { typeForm } = route.params; // tipo do form pra busca o schema
+  const typeForm = 'CAMINHAO';
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
   const [err, setErr] = useState(null);
@@ -52,8 +53,8 @@ const Forms = () => {
     // validar preenchimento obrigatorio, email, qtade minima..
     // onde tem mascara envia strig or value?
     console.log({ form });
-    sendForm();
-    // navigation.navigate('Finish');
+    // sendForm();
+    navigation.navigate('Finish', { typeForm });
   }, []);
 
   const handleNextStep = useCallback(() => {
@@ -79,7 +80,8 @@ const Forms = () => {
       })
     );
     setErr(error);
-    if (Object.keys(error).length === 0) {
+    // Object.keys(error).length === 0
+    if (true) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();
@@ -125,7 +127,11 @@ const Forms = () => {
               />
             );
           }
-          if (component.name === 'InputMask') {
+          if (
+            (component.name === 'InputMask' && !component.dependency) ||
+            (component.dependency &&
+              component.conditional === form[component.dependency])
+          ) {
             return (
               <InputMask
                 error={err?.[component.key]}
@@ -173,6 +179,14 @@ const Forms = () => {
                 value={form[component.key]}
                 title={component.title}
                 crop={component.crop}
+              />
+            );
+          }
+          if (component.name === 'Miniform') {
+            return (
+              <MiniForm
+                components={component.components}
+                limit={component.limit}
               />
             );
           }
