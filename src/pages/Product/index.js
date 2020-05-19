@@ -15,6 +15,12 @@ import {
 } from './styles';
 import { colors, metrics } from '../../styles';
 
+const colorButton = {
+  CAMINHAO: colors.ORANGE,
+  PAGUEAKI: colors.DARK,
+  MEDICACAO: colors.BLUE,
+};
+
 export default function Product() {
   const { data } = useAuth();
   const { navigation, route } = useCommons();
@@ -31,12 +37,12 @@ export default function Product() {
   }, []);
 
   const handleScroll = (event) => {
-    console.log({ event: event.nativeEvent.contentOffset });
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = offsetX / (metrics.SCREEN_WIDTH - 2 * metrics.XBIG - 1);
     setIndexPage(index);
   };
 
+  console.log({ data });
   return (
     <Container background={product.color}>
       <ProductImage source={product.logo} />
@@ -60,12 +66,13 @@ export default function Product() {
           <Ball
             filled={index <= indexPage}
             noMargin={product.infos.length <= indexPage + 1}
+            colorFilled={colorButton[product.value]}
           />
         ))}
       </ViewBall>
       {product.infos.length <= indexPage + 1 && (
         <Button
-          color={colors.DARK}
+          color={colorButton[product.value]}
           margin={metrics.MEDIUM}
           text={product.value === 'PAGUEAKI' ? 'CONTACTAR' : 'CONTRATAR'}
           handleOnPress={handleConfirm}

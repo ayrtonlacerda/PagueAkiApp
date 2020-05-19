@@ -96,7 +96,6 @@ export default [
         placeholder: 'FUB',
         conditional: 'Funcionario publico',
         dependency: 'professional_situation',
-        validator: yup.string().required(),
       },
     ],
   },

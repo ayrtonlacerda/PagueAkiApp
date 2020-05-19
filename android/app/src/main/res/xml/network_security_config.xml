@@ -2,8 +2,12 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">10.0.3.2</domain>
         <domain includeSubdomains="true">192.168.0.22</domain>
         <domain includeSubdomains="true">192.168.0.22:8081</domain>
+        <domain includeSubdomains="true">192.168.1.103</domain>
+        <domain includeSubdomains="true">192.168.1.103:8081</domain>
         <domain includeSubdomains="true">138.197.13.119</domain>
         <domain includeSubdomains="true">138.197.13.119:3333</domain>
     </domain-config>

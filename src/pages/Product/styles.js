@@ -63,8 +63,8 @@ export const Ball = styled.View`
   width: 10px;
   height: 10px;
   border-radius: ${metrics.RADIUS / 3};
-  background-color: ${({ filled }) =>
-    filled ? colors.BLUE : colors.BACKGROUND};
+  background-color: ${({ filled, colorFilled }) =>
+    filled ? colorFilled : colors.BACKGROUND};
   margin: ${({ noMargin }) =>
     noMargin
       ? `0 ${metrics.MEDIUM}px ${0}px
