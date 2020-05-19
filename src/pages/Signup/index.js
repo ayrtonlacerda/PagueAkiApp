@@ -48,28 +48,17 @@ function Signup() {
   );
 
   const handleFetchSuccess = useCallback(() => {
-    console.log({ response });
-    fetchAuth(response.user);
     navigation.navigate('Login');
   }, [response]);
 
   useEffect(() => {
     if (!errorValidation && !response) {
-      fetch(user, 'postSignUp');
-    }
-    if (response) {
-      handleFetchSuccess();
-    }
-  }, [response, errorValidation]);
-
-  /* useEffect(() => {
-    if (!errorValidade && !response) {
       fetch();
     }
     if (response) {
       handleFetchSuccess();
     }
-  }, [response, errorValidade]); */
+  }, [response, errorValidation]);
 
   const changeAvatar = useCallback(() => {
     ImagePicker.showImagePicker(cameraOptions, (res) => setImage(res));
