@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useCommons } from '../../hooks';
+import { useAuth } from '../../global';
 import { Container, Button } from '../../components';
 import {
   OnBoardView,
@@ -15,21 +16,25 @@ import {
 import { colors, metrics } from '../../styles';
 
 export default function Product() {
+  const { data } = useAuth();
   const { navigation, route } = useCommons();
   const [indexPage, setIndexPage] = useState(0);
 
   const { product } = route.params;
 
-  const handleConfirm = useCallback(
-    () => navigation.navigate('Forms', { typeForm: product.value }),
-    []
-  );
+  const handleConfirm = useCallback(() => {
+    if (data) {
+      navigation.navigate('Forms', { typeForm: product.value });
+    } else {
+      navigation.navigate('Login');
+    }
+  }, []);
 
   const handleScroll = (event) => {
     console.log({ event: event.nativeEvent.contentOffset });
     const offsetX = event.nativeEvent.contentOffset.x;
-    const index = offsetX / (metrics.SCREEN_WIDTH - 2 * metrics.XBIG);
-    setIndexPage(index + 0.2);
+    const index = offsetX / (metrics.SCREEN_WIDTH - 2 * metrics.XBIG - 1);
+    setIndexPage(index);
   };
 
   return (
@@ -52,10 +57,13 @@ export default function Product() {
       </OnBoardView>
       <ViewBall>
         {product.infos.map((_, index) => (
-          <Ball filled={index <= indexPage} />
+          <Ball
+            filled={index <= indexPage}
+            noMargin={product.infos.length <= indexPage + 1}
+          />
         ))}
       </ViewBall>
-      {product.infos.length <= indexPage && (
+      {product.infos.length <= indexPage + 1 && (
         <Button
           color={colors.DARK}
           margin={metrics.MEDIUM}

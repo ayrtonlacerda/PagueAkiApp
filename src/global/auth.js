@@ -19,6 +19,7 @@ const [useAuth] = create((set) => ({
   data: null,
   error: null,
   loading: false,
+  setDataAuth: (data) => set((state) => ({ ...state, data })),
   fetchAuth: (data, type) => fetch(set, data, type),
 }));
 

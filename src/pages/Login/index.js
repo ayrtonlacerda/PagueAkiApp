@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import * as yup from 'yup';
 // logic
+import AsyncStorage from '@react-native-community/async-storage';
 import { useAuth } from '../../global';
 // ui
 import {
@@ -12,7 +13,8 @@ import {
   Logo,
 } from '../../components';
 import { ButtonsView, Error } from './styles';
-import { useCommons, useValidation } from '../../hooks';
+import { useCommons, useValidation, useLazyFetch } from '../../hooks';
+import Endpoints, { api } from '../../services';
 
 const schema = {
   email: yup.string().email().required(),
@@ -20,42 +22,59 @@ const schema = {
 };
 
 const Login = () => {
-  const [err, validade] = useValidation(schema);
-  const { fetchAuth, error, loading } = useAuth();
+  const [errorValidade, validade] = useValidation(schema);
+  const { data, setDataAuth } = useAuth();
   const { navigation } = useCommons();
   const [forms, setForms] = useState({
     email: '',
     password: '',
   });
 
+  const [fetch, { error, response, loading }] = useLazyFetch(
+    Endpoints.postSignIn,
+    forms
+  );
+
+  const handleFetchSuccess = useCallback(async () => {
+    console.log({ response });
+    setDataAuth(response.user);
+    api.defaults.headers.Autorization = `Bearer ${response.token}`;
+    await AsyncStorage.setItem('@PagueAkiToken', response.token);
+    navigation.navigate('Home');
+  }, [response]);
+
   useEffect(() => {
-    if (!err) {
-      fetchAuth(forms, 'postSignIn');
+    if (!errorValidade && !response) {
+      fetch();
     }
-  }, [err]);
+    if (response) {
+      handleFetchSuccess();
+    }
+  }, [response, errorValidade]);
 
   const handleLogin = useCallback(() => validade(forms), [
     forms,
     navigation,
-    err,
+    errorValidade,
   ]);
 
   const handleSignup = useCallback(() => navigation.navigate('Signup'), [
     navigation,
   ]);
 
-  const handleForgotPass = useCallback(() => {}, []);
+  const handleForgotPass = useCallback(() => { }, []);
 
+  console.log({ errorValidade, loading, error });
   return (
     <Container>
       <Logo big marBottom />
-      <Error>{error}</Error>
+      <Error>{error && error.response.data?.message}</Error>
       <Input
         keyRef="email"
         placeholder="Email"
         value={forms.user}
         onChangeText={setForms}
-        error={err.email}
+        error={errorValidade.email}
       />
       <Input
         keyRef="password"
@@ -63,7 +82,7 @@ const Login = () => {
         secured
         value={forms.password}
         onChangeText={setForms}
-        error={err.password}
+        error={errorValidade.password}
       />
       <ButtonsView>
         <ButtonTouchable

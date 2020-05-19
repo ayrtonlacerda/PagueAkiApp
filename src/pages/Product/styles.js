@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { colors, metrics } from '../../styles';
 
 export const OnBoardView = styled.ScrollView.attrs({
+  showsHorizontalScrollIndicator: false,
   horizontal: true,
   pagingEnabled: true,
 })`
@@ -64,5 +65,10 @@ export const Ball = styled.View`
   border-radius: ${metrics.RADIUS / 3};
   background-color: ${({ filled }) =>
     filled ? colors.BLUE : colors.BACKGROUND};
-  margin: 0 ${metrics.MEDIUM}px ${metrics.MEDIUM * 2}px ${metrics.MEDIUM}px;
+  margin: ${({ noMargin }) =>
+    noMargin
+      ? `0 ${metrics.MEDIUM}px ${0}px
+    ${metrics.MEDIUM}px`
+      : `0 ${metrics.MEDIUM}px ${metrics.MEDIUM * 2}px
+    ${metrics.MEDIUM}px`};
 `;

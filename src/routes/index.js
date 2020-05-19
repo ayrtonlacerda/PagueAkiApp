@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Material from 'react-native-vector-icons/MaterialIcons';
 import { navigationRef } from './NavigationService';
+import { useAuth } from '../global';
 
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
@@ -56,19 +57,33 @@ const TabsScreen = () => (
   </Tab.Navigator>
 );
 
+const Authenticate = () => (
+  <Stack.Navigator headerMode="none" initialRouteName="Home">
+    <Stack.Screen name="Home" component={TabsScreen} />
+    <Stack.Screen name="Product" component={Product} />
+    <Stack.Screen name="Forms" component={Forms} />
+    <Stack.Screen name="Finish" component={Finish} />
+    <Stack.Screen name="ShowData" component={ShowData} />
+    <Stack.Screen name="Confirm" component={Confirm} />
+  </Stack.Navigator>
+);
+
+const NotAuthenticate = () => (
+  <Stack.Navigator headerMode="none" initialRouteName="Home">
+    <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="Product" component={Product} />
+    <Stack.Screen name="Login" component={Login} />
+    <Stack.Screen name="Signup" component={Signup} />
+  </Stack.Navigator>
+);
+
 export default function Routes() {
+  const teste = useAuth();
+  const { data } = useAuth();
+  console.tron.log(teste);
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator headerMode="none" initialRouteName="Home">
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Home" component={TabsScreen} />
-        <Stack.Screen name="Product" component={Product} />
-        <Stack.Screen name="Forms" component={Forms} />
-        <Stack.Screen name="Finish" component={Finish} />
-        <Stack.Screen name="ShowData" component={ShowData} />
-        <Stack.Screen name="Confirm" component={Confirm} />
-      </Stack.Navigator>
+      {data ? <Authenticate /> : <NotAuthenticate />}
     </NavigationContainer>
   );
 }
