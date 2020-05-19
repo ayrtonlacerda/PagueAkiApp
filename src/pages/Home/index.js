@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useAuth } from '../../global';
 import { Container, Logo, Card } from '../../components';
 import { useCommons } from '../../hooks';
 import { Imgs } from '../../assets';
@@ -116,12 +117,13 @@ const ProductList = [
 ];
 
 export default function Home() {
+  const { data: dataUser } = useAuth();
   const { navigation } = useCommons();
   const handleProduct = useCallback(
     (product) => navigation.navigate('Product', { product }),
     [navigation]
   );
-
+  console.log({ dataUser });
   return (
     <Container>
       <Logo />
