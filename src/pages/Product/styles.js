@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { colors, metrics } from '../../styles';
 
 export const OnBoardView = styled.ScrollView.attrs({
+  showsHorizontalScrollIndicator: false,
   horizontal: true,
   pagingEnabled: true,
 })`

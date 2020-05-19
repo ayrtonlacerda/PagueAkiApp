@@ -30,7 +30,7 @@ const schema = {
 };
 
 function Signup() {
-  const [err, validade] = useValidation(schema);
+  const [errorValidation, validade] = useValidation(schema);
   const { fetchAuth } = useAuth();
   const { navigation } = useCommons();
   const [user, setUser] = useState({
@@ -42,20 +42,23 @@ function Signup() {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    if (!err) {
+    if (!errorValidation) {
       fetchAuth(user, 'postSignUp');
     }
-  }, [err]);
+  }, [errorValidation]);
 
   const changeAvatar = useCallback(() => {
     ImagePicker.showImagePicker(cameraOptions, (res) => setImage(res));
   }, [image]);
 
-  const handleSignUp = useCallback(() => validade(user), [user, err]);
+  const handleSignUp = useCallback(() => validade(user), [
+    user,
+    errorValidation,
+  ]);
 
   const handleCancel = useCallback(() => navigation.navigate('Login'), []);
 
-  console.log({ err });
+  console.log({ errorValidation });
   return (
     <Container>
       <Logo />
@@ -71,7 +74,7 @@ function Signup() {
         placeholder="Usuário Exemplo"
         title="Nome"
         outline
-        error={err.name}
+        error={errorValidation.name}
       />
       <Input
         keyRef="email"
@@ -80,7 +83,7 @@ function Signup() {
         placeholder="exemplo@exemplo.com"
         title="Email"
         outline
-        error={err.email}
+        error={errorValidation.email}
       />
       <Input
         keyRef="phone"
@@ -89,7 +92,7 @@ function Signup() {
         placeholder="(61) 99999-8888"
         title="Celular"
         outline
-        error={err.phone}
+        error={errorValidation.phone}
       />
       <Input
         keyRef="password"
@@ -98,7 +101,7 @@ function Signup() {
         placeholder="Mínimo de 6 dígitos"
         title="Senha"
         outline
-        error={err.password}
+        error={errorValidation.password}
       />
       <ButtonsView>
         <Button text="ENTRAR" handleOnPress={handleSignUp} />

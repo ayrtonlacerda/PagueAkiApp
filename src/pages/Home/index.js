@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import { useAuth } from '../../global';
 import { Container, Logo, Card } from '../../components';
 import { useCommons } from '../../hooks';
@@ -99,26 +100,21 @@ const ProductList = [
     ],
     value: 'CAMINHAO',
   },
-  {
-    texto: 'Dota',
-    descricao: 'Descrição que será fornecida pelos guys que tão pagando',
-    color: '#77A93A',
-    infos: [
-      [
-        'A XXX uma empresa distribuidora de maquinas POS (ponto de venda ou ponto de serviço, do inglês: Point of Sale ou Point of Service). Atua como facilitador para cotização de contas. Pretendendo explorar segmentos diferenciados, possibilita serviços de pagamentos através do cartão de crédito.',
-        'As máquinas de POS possibilitam pagamentos de contas margeadas pelo limite disponibilizado no próprio cartão. Pode-se pagar qualquer tipo de boleto desde que se tenha um código de barras: água, luz, telefone, condomínio, escola, impostos e até mesmo outros cartões de crédito, entre outras utilidades.',
-        'É possível realizar quantas operações de pagamento que se fizerem necessárias, tudo dependerá do limite do seu cartão de crédito. ',
-        'Faça aqui seu cadastro para a aquisição de sua “maquininha de POS”. Entraremos em contato em até 24 horas.',
-      ],
-      ['Texto 5', 'Texto 6', 'Texto 7', 'Texto 8'],
-    ],
-    value: 'MEDICACAO',
-  },
 ];
 
 export default function Home() {
   const { data: dataUser } = useAuth();
   const { navigation } = useCommons();
+
+  const handleToken = useCallback(async () => {
+    const token = await AsyncStorage.getItem('@PagueAkiToken');
+    console.tron.log(token);
+  }, []);
+
+  useEffect(() => {
+    handleToken();
+  }, []);
+
   const handleProduct = useCallback(
     (product) => navigation.navigate('Product', { product }),
     [navigation]

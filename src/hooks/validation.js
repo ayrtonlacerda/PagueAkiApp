@@ -38,7 +38,7 @@ export const useValidation = (schema) => {
     try {
       await validations.validate(param);
       setPrivate(false);
-    } catch (err) {}
+    } catch (err) { }
   }, []);
 
   const err = useMemo(

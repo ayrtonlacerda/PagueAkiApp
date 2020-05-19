@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import * as yup from 'yup';
 // logic
+import AsyncStorage from '@react-native-community/async-storage';
 import { useAuth } from '../../global';
 // ui
 import {
@@ -34,9 +35,12 @@ const Login = () => {
     forms
   );
 
-  const handleFetchSuccess = useCallback(() => {
+  const handleFetchSuccess = useCallback(async () => {
     console.log({ response });
-    setDataAuth(response.data);
+    setDataAuth(response.user);
+    api.defaults.headers.Autorization = `Bearer ${response.token}`;
+    await AsyncStorage.setItem('@PagueAkiToken', response.token);
+    navigation.navigate('Home');
   }, [response]);
 
   useEffect(() => {
@@ -58,7 +62,7 @@ const Login = () => {
     navigation,
   ]);
 
-  const handleForgotPass = useCallback(() => {}, []);
+  const handleForgotPass = useCallback(() => { }, []);
 
   console.log({ errorValidade, loading, error });
   return (
