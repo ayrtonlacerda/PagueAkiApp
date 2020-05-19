@@ -38,7 +38,7 @@ export default function Product() {
   const { product } = route.params;
 
   const handleConfirm = useCallback(() => {
-    if (!data) {
+    if (data) {
       navigation.navigate('Forms', { typeForm: product.value });
     } else {
       navigation.navigate('Login');
