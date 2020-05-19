@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react';
+import { Modal } from 'react-native';
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 import { useCommons } from '../../hooks';
 import { useAuth } from '../../global';
 import { Container, Button } from '../../components';
@@ -12,7 +14,11 @@ import {
   ProductText,
   ViewBall,
   Ball,
+  ImageView,
+  Image,
+  TouchableWithoutFeedback,
 } from './styles';
+import { Imgs } from '../../assets';
 import { colors, metrics } from '../../styles';
 
 const colorButton = {
@@ -21,10 +27,13 @@ const colorButton = {
   MEDICACAO: colors.BLUE,
 };
 
+const largura = metrics.SCREEN_WIDTH;
+
 export default function Product() {
   const { data } = useAuth();
   const { navigation, route } = useCommons();
   const [indexPage, setIndexPage] = useState(0);
+  const [showModalImage, toggleshowModalImage] = useState(false);
 
   const { product } = route.params;
 
@@ -50,13 +59,20 @@ export default function Product() {
       <OnBoardView onScroll={handleScroll}>
         {product.infos.map((page) => (
           <Scroll>
-            {page.map((data, index) => {
-              return (
-                <ProductTextView>
-                  <Point />
-                  <ProductText multiline>{data}</ProductText>
-                </ProductTextView>
-              );
+            {page.map((data) => {
+              return data === 'TABELA' ? (
+                <ImageView
+                  onPress={() => toggleshowModalImage(!showModalImage)}
+                >
+                  <Image source={Imgs.TABELA} />
+                  <ProductText>Clique na tabela para abri-la</ProductText>
+                </ImageView>
+              ) : (
+                  <ProductTextView>
+                    <Point />
+                    <ProductText multiline>{data}</ProductText>
+                  </ProductTextView>
+                );
             })}
           </Scroll>
         ))}
@@ -78,6 +94,25 @@ export default function Product() {
           handleOnPress={handleConfirm}
         />
       )}
+      <Modal visible={showModalImage} transparent={false}>
+        <ImageView onPress={() => toggleshowModalImage(!showModalImage)}>
+          <TouchableWithoutFeedback>
+            <ReactNativeZoomableView
+              maxZoom={1.5}
+              minZoom={0.5}
+              zoomStep={0.5}
+              initialZoom={1}
+              bindToBorders
+              style={{
+                flex: 1,
+                background: '#ddd',
+              }}
+            >
+              <Image style={{ width: largura }} source={Imgs.TABELA} />
+            </ReactNativeZoomableView>
+          </TouchableWithoutFeedback>
+        </ImageView>
+      </Modal>
     </Container>
   );
 }

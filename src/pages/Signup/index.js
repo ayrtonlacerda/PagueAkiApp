@@ -4,11 +4,12 @@ import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 // logic
-import { useCommons, useValidation } from '../../hooks';
+import { useCommons, useValidation, useLazyFetch } from '../../hooks';
 import { useAuth } from '../../global';
 // ui
 import { Input, Button, Logo, Avatar } from '../../components';
 import { Container, ButtonsView } from './styles';
+import Endpoints, { api } from '../../services';
 
 const cameraOptions = {
   title: 'Escolha uma das opções',
@@ -41,11 +42,23 @@ function Signup() {
   });
   const [image, setImage] = useState(null);
 
+  const [fetch, { error, response, loading }] = useLazyFetch(
+    Endpoints.postSignUp,
+    user
+  );
+
+  const handleFetchSuccess = useCallback(() => {
+    navigation.navigate('Login');
+  }, [response]);
+
   useEffect(() => {
-    if (!errorValidation) {
-      fetchAuth(user, 'postSignUp');
+    if (!errorValidation && !response) {
+      fetch();
     }
-  }, [errorValidation]);
+    if (response) {
+      handleFetchSuccess();
+    }
+  }, [response, errorValidation]);
 
   const changeAvatar = useCallback(() => {
     ImagePicker.showImagePicker(cameraOptions, (res) => setImage(res));
@@ -53,12 +66,12 @@ function Signup() {
 
   const handleSignUp = useCallback(() => validade(user), [
     user,
+    navigation,
     errorValidation,
   ]);
 
   const handleCancel = useCallback(() => navigation.navigate('Login'), []);
 
-  console.log({ errorValidation });
   return (
     <Container>
       <Logo />

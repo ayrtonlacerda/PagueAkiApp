@@ -26,6 +26,20 @@ export const ProductImage = styled.Image.attrs({
   border-radius: ${metrics.RADIUS / 2};
 `;
 
+export const ImageView = styled.TouchableOpacity`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Image = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: 300px;
+`;
+
+export const TouchableWithoutFeedback = styled.TouchableWithoutFeedback``;
+
 export const ProductTitle = styled.Text`
   font-weight: bold;
   font-size: 23px;
