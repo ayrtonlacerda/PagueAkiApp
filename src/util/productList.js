@@ -1,6 +1,6 @@
 import { Imgs } from '../assets';
 
-module.export = [
+const productlist = [
   {
     texto: 'PagueAki',
     descricao: 'Descrição que será fornecida pelos guys que tão pagando',
@@ -94,3 +94,5 @@ module.export = [
     value: 'CAMINHAO',
   },
 ];
+
+export default productlist;
