@@ -3,7 +3,7 @@ import { Imgs } from '../assets';
 const productlist = [
   {
     texto: 'PagueAki',
-    descricao: 'Descrição que será fornecida pelos guys que tão pagando',
+    descricao: 'Descrição do produto',
     color: '#77A93A',
     logo: Imgs.LOGO_BRANCA2,
     infos: [
@@ -29,7 +29,7 @@ const productlist = [
   },
   {
     texto: 'Medicação',
-    descricao: 'Descrição que será fornecida pelos guys que tão pagando',
+    descricao: 'Descrição do produto',
     color: '#CD9400',
     logo: Imgs.LOGO_MEDICACAO,
     infos: [
@@ -58,7 +58,7 @@ const productlist = [
   },
   {
     texto: 'Caminhão',
-    descricao: 'Descrição que será fornecida pelos guys que tão pagando',
+    descricao: 'Descrição do produto',
     color: '#5B5B5B',
     logo: Imgs.LOGO_CAMINHAO2,
     infos: [
