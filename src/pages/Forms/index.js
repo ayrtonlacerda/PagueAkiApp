@@ -25,8 +25,7 @@ const ENDPOINTS_SEND = {
 
 const Forms = () => {
   const { navigation, route } = useCommons();
-  // const { typeForm } = route.params; // tipo do form pra busca o schema
-  const typeForm = 'CAMINHAO';
+  const { typeForm } = route.params; // tipo do form pra busca o schema
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
   const [err, setErr] = useState(null);
@@ -81,7 +80,7 @@ const Forms = () => {
     );
     setErr(error);
     // Object.keys(error).length === 0
-    if (true) {
+    if (Object.keys(error).length === 0) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();
