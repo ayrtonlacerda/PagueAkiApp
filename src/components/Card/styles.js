@@ -47,7 +47,6 @@ export const CardDescriptionText = styled.Text.attrs({
   color: #fff;
   font-size: 14px;
   flex: 1;
-  width: 100%;
 `;
 
 // Cards menores
