@@ -13,9 +13,9 @@ export const CardContainer = styled.View`
 
 export const CardTopView = styled.View`
   flex-direction: row;
-  flex: 1;
   padding: 13px;
   align-items: center;
+  width: 100%;
 `;
 
 export const CardTitleText = styled.Text`
@@ -38,6 +38,7 @@ export const CardImage = styled.Image.attrs({
 export const CardBottomView = styled.View`
   flex: 1.3;
   padding-left: 13px;
+  width: 100%;
 `;
 
 export const CardDescriptionText = styled.Text.attrs({
@@ -46,6 +47,7 @@ export const CardDescriptionText = styled.Text.attrs({
   color: #fff;
   font-size: 14px;
   flex: 1;
+  width: 100%;
 `;
 
 // Cards menores
