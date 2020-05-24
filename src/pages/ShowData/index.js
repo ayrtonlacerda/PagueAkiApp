@@ -17,17 +17,14 @@ import { metrics, colors } from '../../styles';
 export default function ShowData() {
   const { route, navigation } = useCommons();
   const { product, logo } = route.params;
-  const infos = product.data;
 
   const handleBackPress = () => {
     navigation.navigate('Perfil');
   };
 
   const handleNextStep = () => {
-    navigation.navigate('Confirm', { product });
+    navigation.navigate('Confirm', { product, logo });
   };
-
-  console.tron.log('teste', product);
 
   return (
     <Container>

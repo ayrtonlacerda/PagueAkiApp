@@ -7,6 +7,7 @@ import { Imgs } from '../../assets';
 import { colors } from '../../styles';
 import { useCommons, useFetch } from '../../hooks';
 import Endpoints from '../../services';
+import { useAuth } from '../../global';
 
 import {
   Logout,
@@ -54,8 +55,10 @@ const options = {
 };
 
 export default function Perfil() {
+  const { setDataAuth } = useAuth();
   const { navigation } = useCommons();
   const [response, loading, error] = useFetch(Endpoints.getPerfil, '', '');
+
   const [fileUri, setFileUri] = useState('');
 
   function changeAvatar() {
@@ -71,7 +74,7 @@ export default function Perfil() {
     });
   }
 
-  const handleLogout = useCallback(() => navigation.navigate('Login'), []);
+  const handleLogout = useCallback(() => setDataAuth(null), []);
 
   const handlePress = useCallback(
     (product, logo) => navigation.navigate('ShowData', { product, logo }),
@@ -106,20 +109,14 @@ export default function Perfil() {
         <Services>
           <ServicesText>Serviços Ativos</ServicesText>
           <Scroll>
-            {objTeste.map((data) => (
-              <Card
-                cardText={data.product}
-                source={data.logo}
-                cardColor={data.color}
-                handleOnPress={() => handlePress(data)}
-              />
-            ))}
-            {response.drugstore === null && response.truck === null ? (
-              <NoServiceText>
-                Nenhum serviço contratado até o momento
-              </NoServiceText>
-            ) : null}
-            {response.drugstore ? (
+            {response &&
+              response.drugstore === null &&
+              response.truck === null && (
+                <NoServiceText>
+                  Nenhum serviço contratado até o momento
+                </NoServiceText>
+              )}
+            {response && response.drugstore && (
               <Card
                 cardText="Medicação"
                 source={Imgs.LOGO_MEDICACAO}
@@ -128,8 +125,8 @@ export default function Perfil() {
                   handlePress(response.drugstore, 'Medicacao')
                 }
               />
-            ) : null}
-            {response.truck ? (
+            )}
+            {response && response.truck && (
               <Card
                 cardText="Caminhão"
                 source={Imgs.LOGO_CAMINHAO2}
@@ -138,7 +135,7 @@ export default function Perfil() {
                   handlePress(response.drugstore, 'Caminhao')
                 }
               />
-            ) : null}
+            )}
           </Scroll>
         </Services>
       </InfosView>
