@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-export const useFetch = (fetch, id, refresh) => {
+export const useFetch = (fetch, id, trigger) => {
   console.log({ refresh });
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
@@ -16,12 +16,12 @@ export const useFetch = (fetch, id, refresh) => {
       setData(null);
     }
     setLoading(false);
-  }, [fetch, refresh]);
+  }, [fetch, refresh, id]);
 
   useEffect(() => {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refresh]);
+  }, [trigger, id]);
 
   return [data, loading];
 };

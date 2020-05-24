@@ -180,7 +180,7 @@ export default [
     components: [
       {
         name: 'Picker',
-        key: 'option_payment',
+        key: 'payment_method',
         title: 'Opções de Pagamento',
         options: [
           'cartão de credito',
@@ -214,6 +214,14 @@ export default [
         placeholder: '0000000',
         conditional: 'debito em conta corrente',
         dependency: 'option_payment',
+      },
+      {
+        name: 'InputMask',
+        key: 'payment_day',
+        title: 'Melhor dia para pagar',
+        mask: '[00]',
+        type: 'numeric',
+        placeholder: '00',
       },
     ],
   },

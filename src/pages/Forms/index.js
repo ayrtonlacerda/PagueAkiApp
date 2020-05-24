@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useCommons, useLazyFetch, useValidation } from '../../hooks';
-import Endpoints from '../../services';
+import Endpoints, { api } from '../../services';
 // ui
 import { MainContainer, ButtonContainer } from './styles';
 import {
@@ -25,11 +25,12 @@ const ENDPOINTS_SEND = {
 
 const Forms = () => {
   const { navigation, route } = useCommons();
-  const { typeForm } = route.params; // tipo do form pra busca o schema
+  // const { typeForm } = route.params; // tipo do form pra busca o schema
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
   const [err, setErr] = useState(null);
 
+  const typeForm = 'MEDICACAO';
   const [sendForm, { response, loading, error }] = useLazyFetch(
     ENDPOINTS_SEND[typeForm],
     form
@@ -45,16 +46,18 @@ const Forms = () => {
     );
   }, [typeForm]);
 
+  useEffect(() => {}, [response, error]);
+
   // so quando processa o form
   const handleFinish = useCallback(() => {
     // so pode finalizar quando preencher todos os campos menos os com dependencia
     // mas se os de dependencia aparecer tem que preencher
     // validar preenchimento obrigatorio, email, qtade minima..
     // onde tem mascara envia strig or value?
-    console.log({ form });
-    // sendForm();
+    console.log({ api });
+    sendForm();
     navigation.navigate('Finish', { typeForm });
-  }, []);
+  }, [form]);
 
   const handleNextStep = useCallback(() => {
     let error = {};
@@ -80,7 +83,7 @@ const Forms = () => {
     );
     setErr(error);
     // Object.keys(error).length === 0
-    if (Object.keys(error).length === 0) {
+    if (true) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();
@@ -101,7 +104,7 @@ const Forms = () => {
     [index, typeForm]
   );
 
-  // asdasconsole.log({ form });
+  console.log({ form });
   return (
     <Container>
       <ProgressForm form={Schemas[typeForm]} index={index} />
@@ -184,8 +187,12 @@ const Forms = () => {
           if (component.name === 'Miniform') {
             return (
               <MiniForm
+                value={form[component.key]}
+                error={err?.[component.key]}
+                keyRef={component.key}
                 components={component.components}
                 limit={component.limit}
+                onChangeOption={setForm}
               />
             );
           }

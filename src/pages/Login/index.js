@@ -38,7 +38,7 @@ const Login = () => {
   const handleFetchSuccess = useCallback(async () => {
     console.log({ response });
     setDataAuth(response.user);
-    api.defaults.headers.Autorization = `Bearer ${response.token}`;
+    api.defaults.headers.Authorization = `Bearer ${response.token}`;
     await AsyncStorage.setItem('@PagueAkiToken', response.token);
     navigation.navigate('Home');
   }, [response]);
@@ -62,7 +62,7 @@ const Login = () => {
     navigation,
   ]);
 
-  const handleForgotPass = useCallback(() => { }, []);
+  const handleForgotPass = useCallback(() => {}, []);
 
   console.log({ errorValidade, loading, error });
   return (

@@ -4,21 +4,27 @@ import { useAuth } from '../../global';
 import { Container, Logo, Card } from '../../components';
 import { useCommons } from '../../hooks';
 import { PRODUCT_LIST } from '../../util';
+import { api } from '../../services';
 
 import { Scroll } from './styles';
 
 export default function Home() {
-  const { data: dataUser } = useAuth();
+  const { data: dataUser, setDataAuth } = useAuth();
   const { navigation } = useCommons();
 
   const handleToken = useCallback(async () => {
     const token = await AsyncStorage.getItem('@PagueAkiToken');
+    if (token) {
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+      setDataAuth(true);
+    }
   }, []);
 
   useEffect(() => {
     handleToken();
   }, []);
 
+  console.log({ dataUser });
   const handleProduct = useCallback(
     (product) => navigation.navigate('Product', { product }),
     [navigation]

@@ -24,6 +24,7 @@ export const useValidation = (schema) => {
               delete error[keyForm];
               setError({ ...error });
             } catch (err) {
+              console.log({ ERROR_VALIDATE: err });
               error[keyForm] = pt[err.errors[0]];
               setError({ ...error });
             }
@@ -38,7 +39,7 @@ export const useValidation = (schema) => {
     try {
       await validations.validate(param);
       setPrivate(false);
-    } catch (err) { }
+    } catch (err) {}
   }, []);
 
   const err = useMemo(
