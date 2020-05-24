@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, useEffect } from 'react';
 import * as yup from 'yup';
+
 // logic
 import AsyncStorage from '@react-native-community/async-storage';
 import { useAuth } from '../../global';
+
 // ui
 import {
   Input,
@@ -38,7 +40,7 @@ const Login = () => {
   const handleFetchSuccess = useCallback(async () => {
     console.log({ response });
     setDataAuth(response.user);
-    api.defaults.headers.Autorization = `Bearer ${response.token}`;
+    api.defaults.headers.Authorization = `Bearer ${response.token}`;
     await AsyncStorage.setItem('@PagueAkiToken', response.token);
     navigation.navigate('Home');
   }, [response]);

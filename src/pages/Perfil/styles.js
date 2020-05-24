@@ -99,3 +99,10 @@ export const Scroll = styled.ScrollView.attrs({
 `;
 
 export const ViewTeste = styled.View``;
+
+export const NoServiceText = styled.Text`
+  color: ${colors.GREY};
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+`;

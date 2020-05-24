@@ -5,10 +5,15 @@ const Endpoints = {
   postSignIn: (data) => {
     return api.post('/sessions', data);
   },
+
+  // signup
   postSignUp: (data) => api.post('/users', data),
 
   // form
   postFormDrugstore: (body) => api.post('/drugstore', body),
+
+  // perfil
+  getPerfil: () => api.get('/userContracts'),
 };
 
 export { api };

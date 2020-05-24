@@ -16,7 +16,7 @@ import { metrics, colors } from '../../styles';
 
 export default function ShowData() {
   const { route, navigation } = useCommons();
-  const { product } = route.params;
+  const { product, logo } = route.params;
   const infos = product.data;
 
   const handleBackPress = () => {
@@ -27,13 +27,19 @@ export default function ShowData() {
     navigation.navigate('Confirm', { product });
   };
 
+  console.tron.log('teste', product);
+
   return (
     <Container>
       <IconView onPress={handleBackPress}>
         <Icon name="keyboard-backspace" size={30} color={colors.PRIMARY} />
       </IconView>
-      <ProductImage source={product.logo} />
-      {product.status === 'Await' ? (
+      <ProductImage
+        source={
+          logo === 'Medicacao' ? Imgs.LOGO_MEDICACAO : Imgs.LOGO_CAMINHAO2
+        }
+      />
+      {product.status === 'Under Analysis' ? (
         <TitleView>
           <ProductTitle>SERVIÇO NÃO ESTÁ ATIVO</ProductTitle>
           <Icone source={Imgs.ALERT} />
@@ -52,13 +58,13 @@ export default function ShowData() {
         </TitleView>
       ) : null}
       <InfosView>
-        <TitleNText title="Nome" text={infos.name} />
-        <TitleNText title="Email" text={infos.email} />
-        <TitleNText title="Celular" text={infos.phone1} />
-        <TitleNText title="RG" text={infos.rg} />
-        <TitleNText title="CPF" text={infos.cpf} />
+        <TitleNText title="Nome" text={product.name} />
+        <TitleNText title="Email" text={product.email} />
+        <TitleNText title="Celular" text={product.phone1} />
+        <TitleNText title="RG" text={product.rg} />
+        <TitleNText title="CPF" text={product.cpf} />
       </InfosView>
-      {product.status === 'Await' ? (
+      {product.status === 'Under Analysis' ? (
         <>
           <InstructionText>
             Clique no botão para enviar o termo assinado

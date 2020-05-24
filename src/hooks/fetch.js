@@ -4,6 +4,7 @@ export const useFetch = (fetch, id, refresh) => {
   console.log({ refresh });
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -11,17 +12,16 @@ export const useFetch = (fetch, id, refresh) => {
       const response = await fetch(id);
       console.log({ response });
       setData(response.data);
-    } catch (error) {
+    } catch (err) {
       console.log({ ERRO_REQUEST: { fetch, refresh, error } });
-      setData(null);
+      setError(err);
     }
     setLoading(false);
   }, [fetch, refresh]);
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh]);
 
-  return [data, loading];
+  return [data, loading, error];
 };
