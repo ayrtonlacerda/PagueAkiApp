@@ -28,12 +28,13 @@ const Forms = () => {
   // const { typeForm } = route.params; // tipo do form pra busca o schema
   const [index, setIndex] = useState(0);
   const [form, setForm] = useState({});
+  const [formFormated, setFormFormated] = useState({});
   const [err, setErr] = useState(null);
 
   const typeForm = 'MEDICACAO';
   const [sendForm, { response, loading, error }] = useLazyFetch(
     ENDPOINTS_SEND[typeForm],
-    form
+    formFormated
   );
   console.log({ response, loading, error });
 
@@ -46,7 +47,9 @@ const Forms = () => {
     );
   }, [typeForm]);
 
-  useEffect(() => {}, [response, error]);
+  useEffect(() => {
+    sendForm();
+  }, [formFormated]);
 
   // so quando processa o form
   const handleFinish = useCallback(() => {
@@ -55,7 +58,13 @@ const Forms = () => {
     // validar preenchimento obrigatorio, email, qtade minima..
     // onde tem mascara envia strig or value?
     console.log({ api });
-    sendForm();
+    let formated = {};
+    Object.keys(form).map(
+      (key) => (formated = { ...formated, [key]: form[key] || '' })
+    );
+    console.log({ formated });
+    setFormFormated(formated);
+
     navigation.navigate('Finish', { typeForm });
   }, [form]);
 

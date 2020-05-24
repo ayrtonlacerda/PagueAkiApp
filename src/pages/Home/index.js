@@ -14,6 +14,7 @@ export default function Home() {
 
   const handleToken = useCallback(async () => {
     const token = await AsyncStorage.getItem('@PagueAkiToken');
+    console.log({ token });
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;
       setDataAuth(true);

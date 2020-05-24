@@ -68,7 +68,7 @@ export default [
       },
       {
         name: 'InputMask',
-        key: 'hight',
+        key: 'height',
         title: 'Altura',
         placeholder: '0.00',
         mask: '[0].[00]',
