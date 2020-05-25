@@ -5,6 +5,8 @@ const Endpoints = {
   postSignIn: (data) => {
     return api.post('/sessions', data);
   },
+
+  // signup
   postSignUp: (data) => api.post('/users', data),
 
   // form

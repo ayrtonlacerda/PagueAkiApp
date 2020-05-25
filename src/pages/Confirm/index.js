@@ -8,7 +8,7 @@ import { metrics, colors } from '../../styles';
 
 export default function Confirm() {
   const { route, navigation } = useCommons();
-  const { product } = route.params;
+  const { product, logo } = route.params;
   const handleBackPress = () => {
     navigation.navigate('ShowData');
   };
@@ -18,7 +18,11 @@ export default function Confirm() {
       <IconView onPress={handleBackPress}>
         <Icon name="keyboard-backspace" size={30} color={colors.PRIMARY} />
       </IconView>
-      <ProductImage source={product.logo} />
+      <ProductImage
+        source={
+          logo === 'Medicacao' ? Imgs.LOGO_MEDICACAO : Imgs.LOGO_CAMINHAO2
+        }
+      />
       <Scroll>
         <Camera
           noForm
@@ -41,7 +45,7 @@ export default function Confirm() {
       <Button
         text="Enviar"
         margin={metrics.XXBIG}
-        onPress={() => {}}
+        onPress={() => { }}
         color={colors.ORANGE}
       />
     </Container>

@@ -1,10 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Container, Card, TitleNText } from '../../components';
 import { Imgs } from '../../assets';
 import { colors } from '../../styles';
-import { useCommons } from '../../hooks';
+import { useCommons, useFetch } from '../../hooks';
+import Endpoints from '../../services';
+import { useAuth } from '../../global';
 
 import {
   Logout,
@@ -13,47 +16,15 @@ import {
   ButtonChange,
   Avatar,
   InfosView,
-  TitleText,
-  UserText,
   Line,
   Services,
   ServicesText,
   Scroll,
   IconExit,
-  ViewTeste,
+  NoServiceText,
 } from './styles';
 
 const objTeste = [
-  {
-    product: 'PagueAki',
-    color: '#77A93A',
-    logo: Imgs.LOGO_BRANCA2,
-    status: 'Active',
-    data: {
-      name: 'Teste',
-      cpf: '123',
-      rg: '321',
-      uf: 'DF',
-      phone1: '890',
-      phone2: '098',
-      email: 'teste email',
-    },
-  },
-  {
-    product: 'Medicação',
-    color: '#CD9400',
-    logo: Imgs.LOGO_MEDICACAO,
-    status: 'Await',
-    data: {
-      name: 'Teste',
-      cpf: '123',
-      rg: '321',
-      uf: 'DF',
-      phone1: '890',
-      phone2: '098',
-      email: 'teste email',
-    },
-  },
   {
     product: 'Caminhão',
     color: '#5B5B5B',
@@ -84,7 +55,10 @@ const options = {
 };
 
 export default function Perfil() {
+  const { setDataAuth } = useAuth();
   const { navigation } = useCommons();
+  const [response, loading, error] = useFetch(Endpoints.getPerfil, '', '');
+
   const [fileUri, setFileUri] = useState('');
 
   function changeAvatar() {
@@ -100,12 +74,14 @@ export default function Perfil() {
     });
   }
 
-  const handleLogout = useCallback(() => navigation.navigate('Login'), []);
+  const handleLogout = useCallback(() => setDataAuth(null), []);
 
   const handlePress = useCallback(
-    (product) => navigation.navigate('ShowData', { product }),
+    (product, logo) => navigation.navigate('ShowData', { product, logo }),
     [navigation]
   );
+
+  // console.tron.log(response);
 
   return (
     <Container noCenter>
@@ -127,20 +103,39 @@ export default function Perfil() {
         </ButtonChange>
       </AvatarView>
       <InfosView>
-        <TitleNText title="E-mail" text="email@teste.com" />
-        <TitleNText title="Telefone" text="(99)98888-8888" />
+        <TitleNText title="E-mail" text="Teste" />
+        <TitleNText title="Telefone" text="Teste" />
         <Line />
         <Services>
           <ServicesText>Serviços Ativos</ServicesText>
           <Scroll>
-            {objTeste.map((data) => (
+            {response &&
+              response.drugstore === null &&
+              response.truck === null && (
+                <NoServiceText>
+                  Nenhum serviço contratado até o momento
+                </NoServiceText>
+              )}
+            {response && response.drugstore && (
               <Card
-                cardText={data.product}
-                source={data.logo}
-                cardColor={data.color}
-                handleOnPress={() => handlePress(data)}
+                cardText="Medicação"
+                source={Imgs.LOGO_MEDICACAO}
+                cardColor={colors.ORANGE}
+                handleOnPress={() =>
+                  handlePress(response.drugstore, 'Medicacao')
+                }
               />
-            ))}
+            )}
+            {response && response.truck && (
+              <Card
+                cardText="Caminhão"
+                source={Imgs.LOGO_CAMINHAO2}
+                cardColor={colors.DARK}
+                handleOnPress={() =>
+                  handlePress(response.drugstore, 'Caminhao')
+                }
+              />
+            )}
           </Scroll>
         </Services>
       </InfosView>
