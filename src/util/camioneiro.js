@@ -198,7 +198,7 @@ export default [
       },
       {
         name: 'InputMask',
-        key: 'rg_civil',
+        key: 'rg',
         title: 'RG',
         mask: '[0000]-[000]',
         type: 'numeric',
@@ -208,7 +208,7 @@ export default [
       },
       {
         name: 'InputMask',
-        key: 'rg_military',
+        key: 'rg',
         title: 'RG',
         mask: '[000000000]-[0]',
         type: 'numeric',
@@ -237,7 +237,7 @@ export default [
         name: 'InputMask',
         key: 'via',
         title: 'Via',
-        mask: '0',
+        mask: '[0]',
         type: 'numeric',
         placeholder: '2',
       },
@@ -253,8 +253,7 @@ export default [
         name: 'InputMask',
         key: 'truck_plate',
         title: 'Placa do caminão',
-        mask: '[000]-[0000]',
-        type: 'numeric',
+        mask: '[AAA]-[0A00]',
         placeholder: 'ABC-0A00',
       },
       {
@@ -277,7 +276,7 @@ export default [
       },
       {
         name: 'InputMask',
-        key: 'birth_date',
+        key: 'truck_date',
         title: 'Ano do caminhão',
         placeholder: '00/00/0000',
         mask: '[00]/[00]/[0000]',

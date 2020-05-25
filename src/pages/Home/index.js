@@ -30,6 +30,7 @@ export default function Home() {
     (product) => navigation.navigate('Product', { product }),
     [navigation]
   );
+
   return (
     <Container>
       <Logo />

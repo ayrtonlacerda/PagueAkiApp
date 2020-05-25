@@ -9,6 +9,9 @@ const Endpoints = {
   // signup
   postSignUp: (data) => api.post('/users', data),
 
+  // perfil
+  getPerfil: () => api.get('/userContracts'),
+
   // form
   postFormDrugstore: (body) => api.post('/drugstore', body),
   postFilesDrugstore: (formData) =>
@@ -17,6 +20,7 @@ const Endpoints = {
         'Content-Type': 'multipart/form-data',
       },
     }),
+  postFormTrucks: (body) => api.post('/trucks', body),
 };
 
 export { api };

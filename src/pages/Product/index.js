@@ -91,7 +91,9 @@ export default function Product() {
           color={colorButton[product.value]}
           margin={metrics.MEDIUM}
           text={product.value === 'PAGUEAKI' ? 'CONTACTAR' : 'CONTRATAR'}
-          handleOnPress={handleConfirm}
+          handleOnPress={
+            product.value === 'PAGUEAKI' ? () => {} : handleConfirm
+          }
         />
       )}
       <Modal visible={showModalImage} transparent={false}>

@@ -37,6 +37,7 @@ const schemaValidate = yup.object().shape({
 
 const ENDPOINTS_SEND = {
   MEDICACAO: Endpoints.postFormDrugstore,
+  CAMINHAO: Endpoints.postFormTrucks,
 };
 
 const ENDPOINTS_FILES = {
@@ -45,7 +46,7 @@ const ENDPOINTS_FILES = {
 
 const Forms = () => {
   const { navigation, route } = useCommons();
-  // const { typeForm } = route.params; // tipo do form pra busca o schema
+  const { typeForm } = route.params; // tipo do form pra busca o schema
   const [index, setIndex] = useState(0);
 
   const [form, setForm] = useState({});
@@ -56,7 +57,6 @@ const Forms = () => {
 
   const [err, setErr] = useState(null);
 
-  const typeForm = 'MEDICACAO';
   const [sendForm, { response, loading, error }] = useLazyFetch(
     ENDPOINTS_SEND[typeForm],
     formFormated
@@ -77,7 +77,7 @@ const Forms = () => {
 
   useEffect(() => {
     console.log({ response, loading, error, responseFiles, errorFiles });
-    if (response && responseFiles) {
+    if (response) {
       navigation.navigate('Finish', { typeForm });
     }
   }, [response, responseFiles, error, errorFiles]);
@@ -102,10 +102,20 @@ const Forms = () => {
 
     Object.keys(form).map(
       // eslint-disable-next-line no-return-assign
-      (key) =>
-        !files.includes(key)
-          ? (formated = { ...formated, [key]: form[key] || '' })
-          : (fileFormated = { ...fileFormated, [key]: form[key] })
+      (key) => {
+        console.log({ key });
+        if (key === 'dependents') {
+          formated = {
+            ...formated,
+            [key]: form[key].toString() || '',
+          };
+          console.log({ formatedMiniForm: formated });
+        } else if (!files.includes(key)) {
+          formated = { ...formated, [key]: form[key] || '' };
+        } else {
+          fileFormated = { ...fileFormated, [key]: form[key] };
+        }
+      }
     );
 
     console.log({ formatedTotal: formated, fileFormated });
@@ -163,7 +173,7 @@ const Forms = () => {
     setErr(errorValidation);
     console.log({ errorValidation });
     // Object.keys(errorValidation).length === 0
-    if (Object.keys(errorValidation).length !== 0) {
+    if (Object.keys(errorValidation).length === 0) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();

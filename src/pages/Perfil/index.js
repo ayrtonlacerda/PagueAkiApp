@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -56,8 +57,12 @@ const options = {
 
 export default function Perfil() {
   const { setDataAuth } = useAuth();
-  const { navigation } = useCommons();
-  const [response, loading, error] = useFetch(Endpoints.getPerfil, '', '');
+  const { navigation, isFocused } = useCommons();
+  const [response, loading, error] = useFetch(
+    Endpoints.getPerfil,
+    '',
+    isFocused
+  );
 
   const [fileUri, setFileUri] = useState('');
 
@@ -74,7 +79,10 @@ export default function Perfil() {
     });
   }
 
-  const handleLogout = useCallback(() => setDataAuth(null), []);
+  const handleLogout = useCallback(() => {
+    AsyncStorage.clear();
+    setDataAuth(null);
+  }, []);
 
   const handlePress = useCallback(
     (product, logo) => navigation.navigate('ShowData', { product, logo }),

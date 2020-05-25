@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
 export const useFetch = (fetch, id, trigger) => {
-  console.log({ refresh });
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,7 +12,7 @@ export const useFetch = (fetch, id, trigger) => {
       console.log({ response });
       setData(response.data);
     } catch (err) {
-      console.log({ ERRO_REQUEST: { fetch, refresh, error } });
+      console.log({ ERRO_REQUEST: { fetch, trigger, error } });
       setError(err);
     }
     setLoading(false);
