@@ -9,6 +9,12 @@ const Endpoints = {
 
   // form
   postFormDrugstore: (body) => api.post('/drugstore', body),
+  postFilesDrugstore: (formData) =>
+    api.post('/drugstoreFiles', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
 };
 
 export { api };

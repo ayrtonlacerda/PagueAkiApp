@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { useCommons, useLazyFetch, useValidation } from '../../hooks';
+import * as yup from 'yup';
+import { useCommons, useLazyFetch } from '../../hooks';
 import Endpoints, { api } from '../../services';
 // ui
 import { MainContainer, ButtonContainer } from './styles';
@@ -18,17 +19,41 @@ import ProgressForm from './components/ProgressForm';
 
 import { Schemas } from '../../util';
 // lidar com o inputmask
+const pt = {
+  'this is a required field': 'esse campo é obrigatorio',
+  'this must be a valid email': 'e-mail inválido',
+  'this must be at least 6 characters': 'mínimo 6 caracteres',
+  'this must be at least 8 characters': 'mínimo 8 caracteres',
+  'this must be at least 11 characters': 'Telefone com DDD e 9 na frente',
+};
+
+/* const schemaValidate = {
+  email: yup.string().email().required(),
+}; */
+
+const schemaValidate = yup.object().shape({
+  email: yup.string().email().required(),
+});
 
 const ENDPOINTS_SEND = {
   MEDICACAO: Endpoints.postFormDrugstore,
+};
+
+const ENDPOINTS_FILES = {
+  MEDICACAO: Endpoints.postFilesDrugstore,
 };
 
 const Forms = () => {
   const { navigation, route } = useCommons();
   // const { typeForm } = route.params; // tipo do form pra busca o schema
   const [index, setIndex] = useState(0);
+
   const [form, setForm] = useState({});
   const [formFormated, setFormFormated] = useState({});
+
+  const [files, setFiles] = useState([]);
+  const [filesFormated, setFilesFormated] = useState([]);
+
   const [err, setErr] = useState(null);
 
   const typeForm = 'MEDICACAO';
@@ -36,44 +61,78 @@ const Forms = () => {
     ENDPOINTS_SEND[typeForm],
     formFormated
   );
-  console.log({ response, loading, error });
-
-  // constroi campos com chaves
-  useEffect(() => {
-    Schemas[typeForm].map((step) =>
-      step.components.map((item) =>
-        setForm((prevState) => ({ ...prevState, [item.key]: null }))
-      )
-    );
-  }, [typeForm]);
 
   useEffect(() => {
     sendForm();
   }, [formFormated]);
 
+  const [
+    sendFiles,
+    { response: responseFiles, loading: loadingFiles, error: errorFiles },
+  ] = useLazyFetch(ENDPOINTS_FILES[typeForm], filesFormated);
+
+  useEffect(() => {
+    sendFiles();
+  }, [filesFormated]);
+
+  useEffect(() => {
+    console.log({ response, loading, error, responseFiles, errorFiles });
+    if (response && responseFiles) {
+      navigation.navigate('Finish', { typeForm });
+    }
+  }, [response, responseFiles, error, errorFiles]);
+
+  // constroi campos com chaves
+  useEffect(() => {
+    Schemas[typeForm].map((step) =>
+      step.components.map((item) => {
+        if (item.name === 'Image') {
+          setFiles((prev) => [...prev, item.key]);
+        }
+        setForm((prevState) => ({ ...prevState, [item.key]: null }));
+      })
+    );
+    console.log({ files });
+  }, [typeForm]);
+
   // so quando processa o form
   const handleFinish = useCallback(() => {
-    // so pode finalizar quando preencher todos os campos menos os com dependencia
-    // mas se os de dependencia aparecer tem que preencher
-    // validar preenchimento obrigatorio, email, qtade minima..
-    // onde tem mascara envia strig or value?
-    console.log({ api });
     let formated = {};
-    Object.keys(form).map(
-      (key) => (formated = { ...formated, [key]: form[key] || '' })
-    );
-    console.log({ formated });
-    setFormFormated(formated);
+    let fileFormated = {};
 
-    navigation.navigate('Finish', { typeForm });
+    Object.keys(form).map(
+      // eslint-disable-next-line no-return-assign
+      (key) =>
+        !files.includes(key)
+          ? (formated = { ...formated, [key]: form[key] || '' })
+          : (fileFormated = { ...fileFormated, [key]: form[key] })
+    );
+
+    console.log({ formatedTotal: formated, fileFormated });
+
+    const formData = new FormData();
+
+    Object.keys(fileFormated).map((key) =>
+      formData.append(key, {
+        uri: fileFormated[key].path,
+        type: 'image/jpg',
+        name: `${key}.jpg`,
+      })
+    );
+
+    setFormFormated(formated);
+    console.log({ formData });
+    setFilesFormated(formData);
+    // navigation.navigate('Finish', { typeForm });
   }, [form]);
 
-  const handleNextStep = useCallback(() => {
-    let error = {};
+  const handleNextStep = useCallback(async () => {
+    let errorValidation = {};
     const keyFromStep = Schemas[typeForm][index].components.filter(
       (item) => item.key
     );
 
+    // varre buscando null para dizer que e obrigatorio
     keyFromStep.map((item) =>
       Object.keys(form).map((key) => {
         if (
@@ -83,16 +142,28 @@ const Forms = () => {
             item.dependency &&
             item.conditional === form[item.dependency])
         ) {
-          error = {
-            ...error,
+          errorValidation = {
+            ...errorValidation,
             [key]: 'Esse campo é obrigatorio',
           };
         }
       })
     );
-    setErr(error);
-    // Object.keys(error).length === 0
-    if (true) {
+
+    if (form.email) {
+      try {
+        await schemaValidate.validate(form);
+      } catch (erro) {
+        errorValidation = {
+          ...errorValidation,
+          email: 'Email Invalido',
+        };
+      }
+    }
+    setErr(errorValidation);
+    console.log({ errorValidation });
+    // Object.keys(errorValidation).length === 0
+    if (Object.keys(errorValidation).length !== 0) {
       if (index < Schemas[typeForm].length - 1) {
         setIndex(index + 1);
       } else handleFinish();
@@ -113,7 +184,7 @@ const Forms = () => {
     [index, typeForm]
   );
 
-  console.log({ form });
+  console.log({ form, files });
   return (
     <Container>
       <ProgressForm form={Schemas[typeForm]} index={index} />
@@ -190,6 +261,7 @@ const Forms = () => {
                 value={form[component.key]}
                 title={component.title}
                 crop={component.crop}
+                onChangeImage={setForm}
               />
             );
           }

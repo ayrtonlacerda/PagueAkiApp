@@ -15,21 +15,21 @@ export const Input = ({
   onChangeText,
   keyboardType,
 }) => (
-    <>
-      {title && <Title>{title}</Title>}
-      {error && <ErrorText>{error}</ErrorText>}
-      <TextInput
-        value={value}
-        onChangeText={(text) =>
-          keyRef
-            ? onChangeText((prevState) => ({ ...prevState, [keyRef]: text }))
-            : onChangeText(text)
-        }
-        secureTextEntry={secured}
-        placeholder={placeholder}
-        outline={outline}
-        paddingLeft={paddingLeft}
-        keyboardType={keyboardType}
-      />
-    </>
-  );
+  <>
+    {title && <Title>{title}</Title>}
+    {error && <ErrorText>{error}</ErrorText>}
+    <TextInput
+      value={value}
+      onChangeText={(text) =>
+        keyRef
+          ? onChangeText((prevState) => ({ ...prevState, [keyRef]: text }))
+          : onChangeText(text)
+      }
+      secureTextEntry={secured}
+      placeholder={placeholder}
+      outline={outline}
+      paddingLeft={paddingLeft}
+      keyboardType={keyboardType}
+    />
+  </>
+);

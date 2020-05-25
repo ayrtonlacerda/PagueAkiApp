@@ -34,6 +34,7 @@ const Login = () => {
     Endpoints.postSignIn,
     forms
   );
+  console.log({ error });
 
   const handleFetchSuccess = useCallback(async () => {
     console.log({ response });

@@ -46,7 +46,7 @@ function Signup() {
     Endpoints.postSignUp,
     user
   );
-
+  console.log({ error });
   const handleFetchSuccess = useCallback(() => {
     navigation.navigate('Login');
   }, [response]);

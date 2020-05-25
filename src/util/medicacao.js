@@ -163,13 +163,13 @@ export default [
       },
       {
         name: 'Image',
-        key: 'doc',
+        key: 'foto_doc',
         title: 'Imagem do documento (CNH ou RG)',
         crop: true,
       },
       {
         name: 'Image',
-        key: 'face',
+        key: 'foto_rosto',
         title: 'Uma foto do seu rosto',
         crop: false,
       },
